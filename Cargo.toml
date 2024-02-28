@@ -1,9 +1,79 @@
+workspace = { members = ["examples/simple"] }
 [package]
 name = "network_manager"
+description = "A crate for interacting with network_manager using zbus"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+homepage = ""
+repository = ""
+readme = ""
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 zbus = "4.1.1"
+
+[features]
+full = [
+    "access_point",
+    "active",
+    "agent_manager",
+    "bluetooth",
+    "bond",
+    "bridge",
+    "checkpoint",
+    "connection",
+    "device",
+
+    "wireless", 
+    "wired"
+    ]
+
+access_point = []
+active = []
+adsl = []
+agent_manager = []
+bluetooth = []
+bond = []
+bridge = []
+checkpoint = []
+connection = []
+device = []
+dhcp4config = []
+dhcp6config = []
+dummy = []
+generic = []
+hsr = []
+infiniband = []
+ip4config = []
+ip6config = []
+iptunnel = []
+loopback = []
+lowpan = []
+macsec = []
+macvlan = []
+modem = []
+nsp = []
+olpc_mesh = []
+ovs_bridge = []
+ovs_interface = []
+ovs_port = []
+plugin = []
+ppp = []
+secret_agent = []
+settings = []
+statistics = []
+team = []
+tun = []
+verth = []
+vlan = []
+vrf = []
+vxlan = []
+wi_max = []
+wifi_p2p = []
+wifi_p2ppeer = []
+wire_gurard = []
+wireless = []
+wired = []
+wpan = []

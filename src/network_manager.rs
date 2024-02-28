@@ -11,9 +11,105 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
+#[cfg(feature = "access_point")]
+pub mod access_point;
+#[cfg(feature = "active")]
+pub mod active;
+#[cfg(feature = "adsl")]
+pub mod adsl;
+#[cfg(feature = "agent_manager")]
+pub mod agent_manager;
+#[cfg(feature = "bluetooth")]
+pub mod bluetooth;
+#[cfg(feature = "bond")]
+pub mod bond;
+#[cfg(feature = "bridge")]
+pub mod bridge;
+#[cfg(feature = "checkpoint")]
+pub mod checkpoint;
+#[cfg(feature = "connection")]
+pub mod connection;
+#[cfg(feature = "device")]
+pub mod device;
+#[cfg(feature = "dhcp4config")]
+pub mod dhcp4config;
+#[cfg(feature = "dhcp6config")]
+pub mod dhcp6config;
+#[cfg(feature = "dummy")]
+pub mod dummy;
+#[cfg(feature = "generic")]
+pub mod generic;
+#[cfg(feature = "hsr")]
+pub mod hsr;
+#[cfg(feature = "infiniband")]
+pub mod infiniband;
+#[cfg(feature = "ip4config")]
+pub mod ip4config;
+#[cfg(feature = "ip6config")]
+pub mod ip6config;
+#[cfg(feature = "iptunnel")]
+pub mod iptunnel;
+#[cfg(feature = "loopback")]
+pub mod loopback;
+#[cfg(feature = "lowpan")]
+pub mod lowpan;
+#[cfg(feature = "macsec")]
+pub mod macsec;
+#[cfg(feature = "macvlan")]
+pub mod macvlan;
+#[cfg(feature = "modem")]
+pub mod modem;
+#[cfg(feature = "nsp")]
+pub mod nsp;
+#[cfg(feature = "olpc_mesh")]
+pub mod olpc_mesh;
+#[cfg(feature = "ovs_bridge")]
+pub mod ovs_bridge;
+#[cfg(feature = "ovs_interface")]
+pub mod ovs_interface;
+#[cfg(feature = "ovs_port")]
+pub mod ovs_port;
+#[cfg(feature = "plugin")]
+pub mod plugin;
+#[cfg(feature = "ppp")]
+pub mod ppp;
+#[cfg(feature = "secret_agent")]
+pub mod secret_agent;
+#[cfg(feature = "settings")]
+pub mod settings;
+#[cfg(feature = "statistics")]
+pub mod statistics;
+#[cfg(feature = "team")]
+pub mod team;
+#[cfg(feature = "tun")]
+pub mod tun;
+#[cfg(feature = "veth")]
+pub mod veth;
+#[cfg(feature = "vlan")]
+pub mod vlan;
+#[cfg(feature = "vrf")]
+pub mod vrf;
+#[cfg(feature = "vxlan")]
+pub mod vxlan;
+#[cfg(feature = "wi_max")]
+pub mod wi_max;
+#[cfg(feature = "wifi_p2p")]
+pub mod wifi_p2p;
+#[cfg(feature = "wifi_p2ppeer")]
+pub mod wifi_p2ppeer;
+#[cfg(feature = "wire_guard")]
+pub mod wire_guard;
+#[cfg(feature = "wired")]
+pub mod wired;
+#[cfg(feature = "wireless")]
+pub mod wireless;
+#[cfg(feature = "wpan")]
+pub mod wpan;
+
 use zbus::proxy;
+
 #[proxy(interface = "org.freedesktop.NetworkManager", assume_defaults = true)]
-trait NetworkManager {
+pub(crate) trait NetworkManager {
     /// ActivateConnection method
     fn activate_connection(
         &self,
@@ -211,8 +307,8 @@ trait NetworkManager {
     fn startup(&self) -> zbus::Result<bool>;
 
     /// State property
-    #[zbus(property)]
-    fn state(&self) -> zbus::Result<u32>;
+    // #[zbus(property)]
+    // fn state(&self) -> zbus::Result<u32>;
 
     /// Version property
     #[zbus(property)]
