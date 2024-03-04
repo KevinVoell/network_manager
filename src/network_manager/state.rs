@@ -1,4 +1,4 @@
-enum State {
+pub enum State {
     Unknown,
     Unmanaged,
     Unavailable,
@@ -15,7 +15,7 @@ enum State {
 }
 
 impl State {
-    fn from_code(code: u32) -> Option<Self> {
+    pub fn from_code(code: u32) -> Option<Self> {
         match code {
             0 => Some(State::Unknown),
             10 => Some(State::Unmanaged),
