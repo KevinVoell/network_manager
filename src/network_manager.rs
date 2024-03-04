@@ -106,6 +106,9 @@ pub mod wireless;
 #[cfg(feature = "wpan")]
 pub mod wpan;
 
+pub mod device_type;
+pub mod state;
+
 use zbus::proxy;
 
 #[proxy(interface = "org.freedesktop.NetworkManager", assume_defaults = true)]

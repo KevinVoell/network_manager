@@ -1,5 +1,5 @@
 #[derive(Debug, PartialEq, PartialOrd)]
-enum DeviceType {
+pub enum DeviceType {
     Ethernet,
     WiFi,
     Bluetooth,
@@ -21,7 +21,7 @@ enum DeviceType {
 }
 
 impl DeviceType {
-    fn from_code(code: u32) -> Option<Self> {
+    pub fn from_code(code: u32) -> Option<Self> {
         match code {
             1 => Some(DeviceType::Ethernet),
             2 => Some(DeviceType::WiFi),
