@@ -1,18 +1,22 @@
-workspace = { members = ["examples/simple"] }
+workspace = { members = [ "examples/list_access_points", "examples/list_devices", "examples/show_wifi_networks","examples/simple", "examples/wifi_access_points", "examples/wifi_active_ap", "examples/wifi_info"] }
 [package]
 name = "network_manager"
 description = "A crate for interacting with network_manager using zbus"
-version = "0.1.0"
+version = "0.5.0"
 edition = "2021"
 license = "MIT"
-homepage = ""
-repository = ""
-readme = ""
+homepage = "https://github.com/KevinVoell/network_manager"
+repository = "https://github.com/KevinVoell/network_manager"
+readme = "readme.md"
+keywords = ["network manager", "networking"]
+categories = []
+documentation = ""
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 zbus = "4.1.1"
+bitflags = "1.2"
 
 [features]
 full = [

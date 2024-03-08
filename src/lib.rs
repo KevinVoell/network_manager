@@ -5,6 +5,10 @@ pub use network_manager::NetworkManagerProxy;
 
 #[cfg(feature = "access_point")]
 pub use network_manager::access_point::AccessPointProxy;
+#[cfg(feature = "access_point")]
+pub use network_manager::access_point_flags::NM80211ApFlags;
+#[cfg(feature = "access_point")]
+pub use network_manager::access_point_security_flags::NM80211ApSecurityFlags;
 #[cfg(feature = "active")]
 pub use network_manager::active::ActiveProxy;
 #[cfg(feature = "adsl")]

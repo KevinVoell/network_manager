@@ -13,6 +13,13 @@
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
 #[cfg(feature = "access_point")]
 pub mod access_point;
+
+#[cfg(feature = "access_point")]
+pub mod access_point_flags;
+
+#[cfg(feature = "access_point")]
+pub mod access_point_security_flags;
+
 #[cfg(feature = "active")]
 pub mod active;
 #[cfg(feature = "adsl")]
@@ -105,6 +112,7 @@ pub mod wired;
 pub mod wireless;
 #[cfg(feature = "wpan")]
 pub mod wpan;
+
 
 pub mod device_type;
 pub mod state;
