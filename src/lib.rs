@@ -21,6 +21,8 @@ pub use network_manager::bluetooth::BluetoothProxy;
 pub use network_manager::bond::BondProxy;
 #[cfg(feature = "bridge")]
 pub use network_manager::bridge::BridgeProxy;
+#[cfg(feature = "access_point")]
+pub use network_manager::channel::Channel;
 #[cfg(feature = "checkpoint")]
 pub use network_manager::checkpoint::CheckpointProxy;
 #[cfg(feature = "connection")]

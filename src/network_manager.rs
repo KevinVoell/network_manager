@@ -32,6 +32,8 @@ pub mod bluetooth;
 pub mod bond;
 #[cfg(feature = "bridge")]
 pub mod bridge;
+#[cfg(feature = "access_point")]
+pub mod channel;
 #[cfg(feature = "checkpoint")]
 pub mod checkpoint;
 #[cfg(feature = "connection")]
