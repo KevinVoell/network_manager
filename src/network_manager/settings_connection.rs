@@ -25,6 +25,8 @@ impl SettingsConnectionProxy<'_> {
 }
 
 #[proxy(
+    default_path = "/org/freedesktop/NetworkManager/Settings/Connection",
+    default_service = "org.freedesktop.NetworkManager",
     interface = "org.freedesktop.NetworkManager.Settings.Connection",
     assume_defaults = true
 )]
