@@ -75,6 +75,8 @@ pub use network_manager::ppp::PPPProxy;
 pub use network_manager::secret_agent::SecretAgentProxy;
 #[cfg(feature = "settings")]
 pub use network_manager::settings::SettingsProxy;
+#[cfg(feature = "settings")]
+pub use network_manager::settings::SettingsConnectionProxy;
 #[cfg(feature = "statistics")]
 pub use network_manager::statistics::StatisticsProxy;
 #[cfg(feature = "team")]
