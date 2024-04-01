@@ -87,7 +87,7 @@ pub mod secret_agent;
 #[cfg(feature = "settings")]
 pub mod settings;
 #[cfg(feature = "settings")]
-pub mod settingsConnection;
+pub mod settings_connection;
 #[cfg(feature = "statistics")]
 pub mod statistics;
 #[cfg(feature = "team")]
