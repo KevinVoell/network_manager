@@ -80,7 +80,7 @@ pub use network_manager::settings_connection::SettingsConnectionProxy;
 pub use network_manager::statistics::StatisticsProxy;
 #[cfg(feature = "team")]
 pub use network_manager::team::TeamProxy;
-#[cfg(feature = "tum")]
+#[cfg(feature = "tun")]
 pub use network_manager::tun::TunProxy;
 #[cfg(feature = "veth")]
 pub use network_manager::veth::VethProxy;
