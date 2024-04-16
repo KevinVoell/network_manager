@@ -73,7 +73,7 @@ full = [
     "wi_max",
     "wifi_p2p",
     "wifi_p2ppeer",
-    "wire_gurard",
+    "wire_guard",
     "wireless",
     "wired",
     "wpan",
@@ -123,7 +123,7 @@ vxlan = []
 wi_max = []
 wifi_p2p = []
 wifi_p2ppeer = []
-wire_gurard = []
+wire_guard = []
 wireless = []
 wired = []
 wpan = []
