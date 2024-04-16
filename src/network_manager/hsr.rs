@@ -18,7 +18,7 @@ impl HsrProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<HsrProxy<'_>> {
-        HsrProxy::builder(&connection)
+        HsrProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

@@ -18,7 +18,7 @@ impl BondProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<BondProxy<'_>> {
-        BondProxy::builder(&connection)
+        BondProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

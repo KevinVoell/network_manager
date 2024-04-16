@@ -18,7 +18,7 @@ impl VrfProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<VrfProxy<'_>> {
-        VrfProxy::builder(&connection)
+        VrfProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

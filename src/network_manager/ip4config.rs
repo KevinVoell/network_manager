@@ -18,7 +18,7 @@ impl IP4ConfigProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<IP4ConfigProxy<'_>> {
-        IP4ConfigProxy::builder(&connection)
+        IP4ConfigProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

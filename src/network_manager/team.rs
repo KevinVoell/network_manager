@@ -18,7 +18,7 @@ impl TeamProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<TeamProxy<'_>> {
-        TeamProxy::builder(&connection)
+        TeamProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

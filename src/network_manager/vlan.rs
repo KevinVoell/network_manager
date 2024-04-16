@@ -18,7 +18,7 @@ impl VlanProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<VlanProxy<'_>> {
-        VlanProxy::builder(&connection)
+        VlanProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

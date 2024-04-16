@@ -17,7 +17,7 @@ use zbus::{Connection, Result, proxy};
 
 impl PluginProxy<'_> {
     pub async fn new_from_path(device_path: zbus::zvariant::OwnedObjectPath, connection: &Connection) -> Result<PluginProxy<'_>> {
-        PluginProxy::builder(&connection)
+        PluginProxy::builder(connection)
         .path(device_path)
         .expect("Path not found")
         .build()

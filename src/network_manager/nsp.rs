@@ -18,7 +18,7 @@ impl NspProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<NspProxy<'_>> {
-        NspProxy::builder(&connection)
+        NspProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

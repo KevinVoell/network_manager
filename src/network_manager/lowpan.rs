@@ -18,7 +18,7 @@ impl LowpanProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<LowpanProxy<'_>> {
-        LowpanProxy::builder(&connection)
+        LowpanProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

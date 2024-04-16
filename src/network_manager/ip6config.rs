@@ -18,7 +18,7 @@ impl IP6ConfigProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<IP6ConfigProxy<'_>> {
-        IP6ConfigProxy::builder(&connection)
+        IP6ConfigProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

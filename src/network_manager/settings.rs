@@ -18,7 +18,7 @@ impl SettingsProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<SettingsProxy<'_>> {
-        SettingsProxy::builder(&connection)
+        SettingsProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

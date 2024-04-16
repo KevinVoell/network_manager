@@ -18,7 +18,7 @@ impl PPPProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<PPPProxy<'_>> {
-        PPPProxy::builder(&connection)
+        PPPProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

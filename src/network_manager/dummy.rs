@@ -18,7 +18,7 @@ impl DummyProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<DummyProxy<'_>> {
-        DummyProxy::builder(&connection)
+        DummyProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

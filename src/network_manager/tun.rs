@@ -18,7 +18,7 @@ impl TunProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<TunProxy<'_>> {
-        TunProxy::builder(&connection)
+        TunProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

@@ -18,7 +18,7 @@ impl WireGuardProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<WireGuardProxy<'_>> {
-        WireGuardProxy::builder(&connection)
+        WireGuardProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

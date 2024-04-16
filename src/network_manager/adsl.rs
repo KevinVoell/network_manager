@@ -19,7 +19,7 @@ impl AdslProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<AdslProxy<'_>> {
-        AdslProxy::builder(&connection)
+        AdslProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

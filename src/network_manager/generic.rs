@@ -18,7 +18,7 @@ impl GenericProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<GenericProxy<'_>> {
-        GenericProxy::builder(&connection)
+        GenericProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

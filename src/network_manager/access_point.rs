@@ -19,7 +19,7 @@ impl AccessPointProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<AccessPointProxy<'_>> {
-        AccessPointProxy::builder(&connection)
+        AccessPointProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

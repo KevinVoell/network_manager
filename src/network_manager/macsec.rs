@@ -18,7 +18,7 @@ impl MacsecProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<MacsecProxy<'_>> {
-        MacsecProxy::builder(&connection)
+        MacsecProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

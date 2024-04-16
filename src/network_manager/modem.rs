@@ -18,7 +18,7 @@ impl ModemProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<ModemProxy<'_>> {
-        ModemProxy::builder(&connection)
+        ModemProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

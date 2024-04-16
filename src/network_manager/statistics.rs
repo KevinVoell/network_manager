@@ -18,7 +18,7 @@ impl StatisticsProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<StatisticsProxy<'_>> {
-        StatisticsProxy::builder(&connection)
+        StatisticsProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

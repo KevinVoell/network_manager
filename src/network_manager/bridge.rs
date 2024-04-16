@@ -18,7 +18,7 @@ impl BridgeProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<BridgeProxy<'_>> {
-        BridgeProxy::builder(&connection)
+        BridgeProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

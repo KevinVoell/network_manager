@@ -18,7 +18,7 @@ impl WpanProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<WpanProxy<'_>> {
-        WpanProxy::builder(&connection)
+        WpanProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

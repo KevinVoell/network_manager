@@ -18,7 +18,7 @@ impl MacvlanProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<MacvlanProxy<'_>> {
-        MacvlanProxy::builder(&connection)
+        MacvlanProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

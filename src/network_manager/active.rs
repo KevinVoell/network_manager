@@ -18,7 +18,7 @@ impl ActiveProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<ActiveProxy<'_>> {
-        ActiveProxy::builder(&connection)
+        ActiveProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

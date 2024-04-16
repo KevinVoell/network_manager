@@ -18,7 +18,7 @@ impl VethProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<VethProxy<'_>> {
-        VethProxy::builder(&connection)
+        VethProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

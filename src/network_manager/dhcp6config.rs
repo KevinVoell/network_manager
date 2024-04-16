@@ -18,7 +18,7 @@ impl DHCP6ConfigProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<DHCP6ConfigProxy<'_>> {
-        DHCP6ConfigProxy::builder(&connection)
+        DHCP6ConfigProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

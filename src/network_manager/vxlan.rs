@@ -18,7 +18,7 @@ impl VxlanProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<VxlanProxy<'_>> {
-        VxlanProxy::builder(&connection)
+        VxlanProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

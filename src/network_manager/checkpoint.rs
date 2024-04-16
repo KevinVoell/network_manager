@@ -18,7 +18,7 @@ impl CheckpointProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<CheckpointProxy<'_>> {
-        CheckpointProxy::builder(&connection)
+        CheckpointProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

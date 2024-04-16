@@ -18,7 +18,7 @@ impl SecretAgentProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<SecretAgentProxy<'_>> {
-        SecretAgentProxy::builder(&connection)
+        SecretAgentProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

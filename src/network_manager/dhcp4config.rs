@@ -18,7 +18,7 @@ impl DHCP4ConfigProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<DHCP4ConfigProxy<'_>> {
-        DHCP4ConfigProxy::builder(&connection)
+        DHCP4ConfigProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

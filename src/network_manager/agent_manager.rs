@@ -18,7 +18,7 @@ impl AgentManagerProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<AgentManagerProxy<'_>> {
-        AgentManagerProxy::builder(&connection)
+        AgentManagerProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

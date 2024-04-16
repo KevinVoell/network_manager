@@ -18,7 +18,7 @@ impl WifiP2PPeerProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<WifiP2PPeerProxy<'_>> {
-        WifiP2PPeerProxy::builder(&connection)
+        WifiP2PPeerProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

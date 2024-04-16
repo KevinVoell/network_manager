@@ -18,7 +18,7 @@ impl OlpcMeshProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<OlpcMeshProxy<'_>> {
-        OlpcMeshProxy::builder(&connection)
+        OlpcMeshProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

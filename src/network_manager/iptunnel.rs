@@ -18,7 +18,7 @@ impl IPTunnelProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<IPTunnelProxy<'_>> {
-        IPTunnelProxy::builder(&connection)
+        IPTunnelProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

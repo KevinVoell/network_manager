@@ -18,7 +18,7 @@ impl OvsPortProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<OvsPortProxy<'_>> {
-        OvsPortProxy::builder(&connection)
+        OvsPortProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()

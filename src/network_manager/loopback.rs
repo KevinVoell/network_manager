@@ -18,7 +18,7 @@ impl LoopbackProxy<'_> {
         device_path: zbus::zvariant::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<LoopbackProxy<'_>> {
-        LoopbackProxy::builder(&connection)
+        LoopbackProxy::builder(connection)
             .path(device_path)
             .expect("Path not found")
             .build()
