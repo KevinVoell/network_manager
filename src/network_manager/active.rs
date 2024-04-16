@@ -11,18 +11,21 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{Connection, Result, proxy};
+use zbus::{proxy, Connection, Result};
 
 impl ActiveProxy<'_> {
-    pub async fn new_from_path(device_path: zbus::zvariant::OwnedObjectPath, connection: &Connection) -> Result<ActiveProxy<'_>> {
+    pub async fn new_from_path(
+        device_path: zbus::zvariant::OwnedObjectPath,
+        connection: &Connection,
+    ) -> Result<ActiveProxy<'_>> {
         ActiveProxy::builder(&connection)
-        .path(device_path)
-        .expect("Path not found")
-        .build()
-        .await
+            .path(device_path)
+            .expect("Path not found")
+            .build()
+            .await
     }
 }
-        
+
 #[proxy(
     default_path = "/org/freedesktop/NetworkManager/Connection/Active",
     default_service = "org.freedesktop.NetworkManager",
@@ -31,7 +34,7 @@ impl ActiveProxy<'_> {
 )]
 pub(crate) trait Active {
     /// StateChanged signal
-    #[zbus(signal, name="state_changed")]
+    #[zbus(signal, name = "state_changed")]
     fn active_state_changed(&self, state: u32, reason: u32) -> zbus::Result<()>;
 
     /// Connection property

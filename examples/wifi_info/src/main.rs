@@ -38,4 +38,3 @@ async fn main() {
         Err(_) => println!("Wireless device not found!"),
     };
 }
-

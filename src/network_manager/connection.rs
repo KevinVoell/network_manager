@@ -11,18 +11,21 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{Connection, Result, proxy};
+use zbus::{proxy, Connection, Result};
 
 impl ConnectionProxy<'_> {
-    pub async fn new_from_path(device_path: zbus::zvariant::OwnedObjectPath, connection: &Connection) -> Result<ConnectionProxy<'_>> {
+    pub async fn new_from_path(
+        device_path: zbus::zvariant::OwnedObjectPath,
+        connection: &Connection,
+    ) -> Result<ConnectionProxy<'_>> {
         ConnectionProxy::builder(&connection)
-        .path(device_path)
-        .expect("Path not found")
-        .build()
-        .await
+            .path(device_path)
+            .expect("Path not found")
+            .build()
+            .await
     }
 }
-        
+
 #[proxy(
     default_path = "/org/freedesktop/NetworkManager/VPN/Connection",
     default_service = "org.freedesktop.NetworkManager",
@@ -31,7 +34,7 @@ impl ConnectionProxy<'_> {
 )]
 trait Connection {
     /// VpnStateChanged signal
-    #[zbus(signal, name="vpn_state_changed")]
+    #[zbus(signal, name = "vpn_state_changed")]
     fn vpn_vpn_state_changed(&self, state: u32, reason: u32) -> zbus::Result<()>;
 
     /// Banner property
