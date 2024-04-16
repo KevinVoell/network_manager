@@ -108,18 +108,3 @@ pub use network_manager::wpan::WpanProxy;
 
 pub use network_manager::device_type::DeviceType;
 pub use network_manager::state::State;
-
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
