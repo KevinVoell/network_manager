@@ -1,4 +1,12 @@
-workspace = { members = [ "examples/list_access_points", "examples/list_devices", "examples/show_wifi_networks","examples/simple", "examples/wifi_access_points", "examples/wifi_active_ap", "examples/wifi_info"] }
+[workspace]
+members = [
+    "examples/list_devices",
+    "examples/show_wifi_networks",
+    "examples/simple",
+    "examples/wifi_active_ap",
+    "examples/wifi_info",
+]
+
 [package]
 name = "network_manager"
 description = "A crate for interacting with network_manager using zbus"
@@ -30,7 +38,7 @@ full = [
     "connection",
     "device",
 
-    "wireless", 
+    "wireless",
     "wired"
     ]
 
