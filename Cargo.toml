@@ -66,6 +66,7 @@ full = [
     "team",
     "tun",
     "verth",
+    "veth",
     "vlan",
     "vrf",
     "vxlan",
@@ -115,6 +116,7 @@ statistics = []
 team = []
 tun = []
 verth = []
+veth = []
 vlan = []
 vrf = []
 vxlan = []
