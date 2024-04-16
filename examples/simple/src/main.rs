@@ -1,4 +1,5 @@
-use network_manager::{Connection, NetworkManagerProxy, DeviceProxy};
+use network_manager::{NetworkManagerProxy, DeviceProxy};
+use zbus::Connection;
 
 #[tokio::main]
 async fn main() {

@@ -17,7 +17,8 @@
 //! the use or other dealings in the example code.
 
 use std::env;
-use network_manager::{Connection, NetworkManagerProxy, WirelessProxy, AccessPointProxy};
+use network_manager::{NetworkManagerProxy, WirelessProxy, AccessPointProxy};
+use zbus::Connection;
 
 #[tokio::main]
 async fn main() {

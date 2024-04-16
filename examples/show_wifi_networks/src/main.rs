@@ -14,7 +14,8 @@
 //! contract, tort, or otherwise, arising from, out of, or in connection with the example code or 
 //! the use or other dealings in the example code.
 use std::collections::HashMap;
-use network_manager::{AccessPointProxy, Connection, DeviceProxy, NetworkManagerProxy, WirelessProxy, DeviceType, NM80211ApFlags, NM80211ApSecurityFlags, Channel};
+use network_manager::{AccessPointProxy, DeviceProxy, NetworkManagerProxy, WirelessProxy, DeviceType, NM80211ApFlags, NM80211ApSecurityFlags, Channel};
+use zbus::Connection;
 use zbus::zvariant::OwnedObjectPath;
 use std::fs::File;
 use std::io::Read;

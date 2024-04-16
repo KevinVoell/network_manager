@@ -1,6 +1,5 @@
 mod network_manager;
 
-pub use zbus::{Connection, Result, proxy};
 pub use network_manager::NetworkManagerProxy;
 
 #[cfg(feature = "access_point")]
