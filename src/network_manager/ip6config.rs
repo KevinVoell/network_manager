@@ -19,8 +19,7 @@ impl IP6ConfigProxy<'_> {
         connection: &Connection,
     ) -> Result<IP6ConfigProxy<'_>> {
         IP6ConfigProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

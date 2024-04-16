@@ -19,8 +19,7 @@ impl CheckpointProxy<'_> {
         connection: &Connection,
     ) -> Result<CheckpointProxy<'_>> {
         CheckpointProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

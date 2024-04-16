@@ -20,8 +20,7 @@ impl AccessPointProxy<'_> {
         connection: &Connection,
     ) -> Result<AccessPointProxy<'_>> {
         AccessPointProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

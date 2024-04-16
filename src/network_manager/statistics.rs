@@ -19,8 +19,7 @@ impl StatisticsProxy<'_> {
         connection: &Connection,
     ) -> Result<StatisticsProxy<'_>> {
         StatisticsProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

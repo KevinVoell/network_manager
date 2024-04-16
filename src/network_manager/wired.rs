@@ -19,8 +19,7 @@ impl WiredProxy<'_> {
         connection: &Connection,
     ) -> Result<WiredProxy<'_>> {
         WiredProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

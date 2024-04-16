@@ -19,8 +19,7 @@ impl VxlanProxy<'_> {
         connection: &Connection,
     ) -> Result<VxlanProxy<'_>> {
         VxlanProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

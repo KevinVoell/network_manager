@@ -19,8 +19,7 @@ impl ActiveProxy<'_> {
         connection: &Connection,
     ) -> Result<ActiveProxy<'_>> {
         ActiveProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

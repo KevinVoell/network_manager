@@ -19,8 +19,7 @@ impl IP4ConfigProxy<'_> {
         connection: &Connection,
     ) -> Result<IP4ConfigProxy<'_>> {
         IP4ConfigProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

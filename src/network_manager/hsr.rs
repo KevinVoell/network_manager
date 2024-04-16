@@ -19,8 +19,7 @@ impl HsrProxy<'_> {
         connection: &Connection,
     ) -> Result<HsrProxy<'_>> {
         HsrProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

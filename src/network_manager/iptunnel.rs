@@ -19,8 +19,7 @@ impl IPTunnelProxy<'_> {
         connection: &Connection,
     ) -> Result<IPTunnelProxy<'_>> {
         IPTunnelProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

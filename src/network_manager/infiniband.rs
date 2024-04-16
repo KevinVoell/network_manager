@@ -19,8 +19,7 @@ impl InfinibandProxy<'_> {
         connection: &Connection,
     ) -> Result<InfinibandProxy<'_>> {
         InfinibandProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

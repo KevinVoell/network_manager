@@ -19,8 +19,7 @@ impl OvsPortProxy<'_> {
         connection: &Connection,
     ) -> Result<OvsPortProxy<'_>> {
         OvsPortProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

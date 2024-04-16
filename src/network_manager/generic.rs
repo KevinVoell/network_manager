@@ -19,8 +19,7 @@ impl GenericProxy<'_> {
         connection: &Connection,
     ) -> Result<GenericProxy<'_>> {
         GenericProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

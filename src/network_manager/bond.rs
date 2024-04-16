@@ -19,8 +19,7 @@ impl BondProxy<'_> {
         connection: &Connection,
     ) -> Result<BondProxy<'_>> {
         BondProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

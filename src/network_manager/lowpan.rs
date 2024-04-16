@@ -19,8 +19,7 @@ impl LowpanProxy<'_> {
         connection: &Connection,
     ) -> Result<LowpanProxy<'_>> {
         LowpanProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

@@ -19,8 +19,7 @@ impl WifiP2PPeerProxy<'_> {
         connection: &Connection,
     ) -> Result<WifiP2PPeerProxy<'_>> {
         WifiP2PPeerProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

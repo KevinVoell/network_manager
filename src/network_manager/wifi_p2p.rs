@@ -19,8 +19,7 @@ impl WifiP2PProxy<'_> {
         connection: &Connection,
     ) -> Result<WifiP2PProxy<'_>> {
         WifiP2PProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

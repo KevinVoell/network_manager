@@ -19,8 +19,7 @@ impl VethProxy<'_> {
         connection: &Connection,
     ) -> Result<VethProxy<'_>> {
         VethProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

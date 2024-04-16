@@ -19,8 +19,7 @@ impl AgentManagerProxy<'_> {
         connection: &Connection,
     ) -> Result<AgentManagerProxy<'_>> {
         AgentManagerProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

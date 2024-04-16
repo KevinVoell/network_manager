@@ -19,8 +19,7 @@ impl VrfProxy<'_> {
         connection: &Connection,
     ) -> Result<VrfProxy<'_>> {
         VrfProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

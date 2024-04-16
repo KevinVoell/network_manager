@@ -19,8 +19,7 @@ impl MacsecProxy<'_> {
         connection: &Connection,
     ) -> Result<MacsecProxy<'_>> {
         MacsecProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

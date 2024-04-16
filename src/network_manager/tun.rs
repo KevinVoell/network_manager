@@ -19,8 +19,7 @@ impl TunProxy<'_> {
         connection: &Connection,
     ) -> Result<TunProxy<'_>> {
         TunProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

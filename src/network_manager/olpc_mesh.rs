@@ -19,8 +19,7 @@ impl OlpcMeshProxy<'_> {
         connection: &Connection,
     ) -> Result<OlpcMeshProxy<'_>> {
         OlpcMeshProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

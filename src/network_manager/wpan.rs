@@ -19,8 +19,7 @@ impl WpanProxy<'_> {
         connection: &Connection,
     ) -> Result<WpanProxy<'_>> {
         WpanProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

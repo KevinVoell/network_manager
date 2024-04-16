@@ -19,8 +19,7 @@ impl WiMaxProxy<'_> {
         connection: &Connection,
     ) -> Result<WiMaxProxy<'_>> {
         WiMaxProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

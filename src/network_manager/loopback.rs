@@ -19,8 +19,7 @@ impl LoopbackProxy<'_> {
         connection: &Connection,
     ) -> Result<LoopbackProxy<'_>> {
         LoopbackProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

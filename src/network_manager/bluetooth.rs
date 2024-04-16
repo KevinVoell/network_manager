@@ -19,8 +19,7 @@ impl BluetoothProxy<'_> {
         connection: &Connection,
     ) -> Result<BluetoothProxy<'_>> {
         BluetoothProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

@@ -20,8 +20,7 @@ impl DeviceProxy<'_> {
         connection: &Connection,
     ) -> Result<DeviceProxy<'_>> {
         DeviceProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

@@ -19,8 +19,7 @@ impl BridgeProxy<'_> {
         connection: &Connection,
     ) -> Result<BridgeProxy<'_>> {
         BridgeProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

@@ -19,8 +19,7 @@ impl DHCP4ConfigProxy<'_> {
         connection: &Connection,
     ) -> Result<DHCP4ConfigProxy<'_>> {
         DHCP4ConfigProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

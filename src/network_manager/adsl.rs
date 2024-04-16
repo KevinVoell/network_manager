@@ -20,8 +20,7 @@ impl AdslProxy<'_> {
         connection: &Connection,
     ) -> Result<AdslProxy<'_>> {
         AdslProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

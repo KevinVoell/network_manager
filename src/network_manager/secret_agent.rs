@@ -19,8 +19,7 @@ impl SecretAgentProxy<'_> {
         connection: &Connection,
     ) -> Result<SecretAgentProxy<'_>> {
         SecretAgentProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }

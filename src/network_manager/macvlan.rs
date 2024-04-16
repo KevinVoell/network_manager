@@ -19,8 +19,7 @@ impl MacvlanProxy<'_> {
         connection: &Connection,
     ) -> Result<MacvlanProxy<'_>> {
         MacvlanProxy::builder(connection)
-            .path(device_path)
-            .expect("Path not found")
+            .path(device_path)?
             .build()
             .await
     }
