@@ -69,7 +69,7 @@ async fn get_ip4_address(device_proxy: &DeviceProxy<'_>, connection: &Connection
     let Ok(address_data) = config.address_data().await else {
         return String::from("Unknown");
     };
-    let Some(address) = address_data.get(0).and_then(|addr| addr.get("address")) else {
+    let Some(address) = address_data.first().and_then(|addr| addr.get("address")) else {
         return String::from("Unknown");
     };
 
