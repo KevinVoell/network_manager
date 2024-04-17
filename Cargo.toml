@@ -16,7 +16,7 @@ license = "MIT"
 homepage = "https://github.com/KevinVoell/network_manager"
 repository = "https://github.com/KevinVoell/network_manager"
 readme = "README.md"
-keywords = ["network manager", "networking", "zbus"]
+keywords = ["network-manager", "networking", "zbus"]
 categories = []
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
