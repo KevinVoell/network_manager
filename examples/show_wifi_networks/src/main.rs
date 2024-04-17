@@ -57,7 +57,7 @@ async fn main() {
         };
 
         if !is_first {
-            println!("");
+            println!();
         } else {
             is_first = false;
         }
