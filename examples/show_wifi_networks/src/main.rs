@@ -221,17 +221,18 @@ async fn print_ap_info(access_point: &AccessPointProxy<'_>, access_point_path: O
 
     let mode = access_point.mode().await.expect("Could not get mode");
 
-    let t = access_point
+    let last_seen_time: i128 = access_point
         .last_seen()
         .await
-        .expect("Could not get last_seen");
+        .expect("Could not get last_seen")
+        .try_into().unwrap();
 
-    let last_seen = if t == 0 {
+    let last_seen = if last_seen_time == 0 {
         "no scan completed".to_string()
     } else {
-        let last_boot: i32 = get_uptime().as_millis().try_into().unwrap();
+        let last_boot: i128 = get_uptime().as_millis().try_into().unwrap();
 
-        let duration = (last_boot / 1000) - t;
+        let duration = (last_boot / 1000) - last_seen_time;
         format!("{duration} sec ago")
     };
 
