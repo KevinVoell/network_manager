@@ -158,7 +158,7 @@ async fn print_device_info(
         let last_boot = get_uptime().as_millis();
 
         let duration = (last_boot - t) / 1000;
-        last_scan = String::from(format!("{} sec ago", duration));
+        last_scan = format!("{duration} sec ago");
 
         if device_needs_scan(wireless_proxy).await {
             last_scan += " (stale)";
