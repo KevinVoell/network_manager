@@ -351,7 +351,7 @@ fn wifi_freq_to_channel(freq: u32) -> u32 {
         i += 1;
     }
 
-    return bg_table[i].channel;
+    bg_table[i].channel
 }
 
 fn flags_to_str(flags: NM80211ApFlags) -> String {
