@@ -61,7 +61,7 @@ async fn main() {
 
 async fn get_ip4_address(device_proxy: &DeviceProxy<'_>, connection: &Connection) -> String {
     let ip4config_path = device_proxy.ip4_config().await;
-    let ip4config = IP4ConfigProxy::new_from_path(ip4config_path.unwrap(), &connection).await;
+    let ip4config = IP4ConfigProxy::new_from_path(ip4config_path.unwrap(), connection).await;
 
     let Ok(config) = ip4config else {
         return String::from("Unknown");

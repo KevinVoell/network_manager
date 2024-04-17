@@ -87,7 +87,7 @@ async fn main() {
 }
 
 async fn device_ensure_scanned(wireless_proxy: &WirelessProxy<'_>) {
-    if !device_needs_scan(&wireless_proxy).await {
+    if !device_needs_scan(wireless_proxy).await {
         return;
     }
 
@@ -100,7 +100,7 @@ async fn device_ensure_scanned(wireless_proxy: &WirelessProxy<'_>) {
     println!("Scan requested, waiting for scan to complete");
     for _ in 0..5 {
         tokio::time::sleep(tokio::time::Duration::from_millis(10 * 1000)).await;
-        if !device_needs_scan(&wireless_proxy).await {
+        if !device_needs_scan(wireless_proxy).await {
             return;
         }
 
@@ -160,7 +160,7 @@ async fn print_device_info(
         let duration = (last_boot - t) / 1000;
         last_scan = String::from(format!("{} sec ago", duration));
 
-        if device_needs_scan(&wireless_proxy).await {
+        if device_needs_scan(wireless_proxy).await {
             last_scan += " (stale)";
         }
     }
@@ -171,7 +171,7 @@ async fn print_device_info(
 
     match ap {
         Ok(ap) => {
-            let access_point = AccessPointProxy::new_from_path(ap.clone(), &connection)
+            let access_point = AccessPointProxy::new_from_path(ap.clone(), connection)
                 .await
                 .expect("Could not get access point");
 
