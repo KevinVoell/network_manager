@@ -11,15 +11,17 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{Connection, Result, proxy};
+use zbus::{proxy, Connection, Result};
 
 impl IP6ConfigProxy<'_> {
-    pub async fn new_from_path(device_path: zbus::zvariant::OwnedObjectPath, connection: &Connection) -> Result<IP6ConfigProxy<'_>> {
-        IP6ConfigProxy::builder(&connection)
-        .path(device_path)
-        .expect("Path not found")
-        .build()
-        .await
+    pub async fn new_from_path(
+        device_path: zbus::zvariant::OwnedObjectPath,
+        connection: &Connection,
+    ) -> Result<IP6ConfigProxy<'_>> {
+        IP6ConfigProxy::builder(connection)
+            .path(device_path)?
+            .build()
+            .await
     }
 }
 
@@ -38,6 +40,7 @@ trait IP6Config {
 
     /// Addresses property
     #[zbus(property)]
+    #[allow(clippy::type_complexity)]
     fn addresses(&self) -> zbus::Result<Vec<(Vec<u8>, u32, Vec<u8>)>>;
 
     /// DnsOptions property
@@ -68,6 +71,7 @@ trait IP6Config {
 
     /// Routes property
     #[zbus(property)]
+    #[allow(clippy::type_complexity)]
     fn routes(&self) -> zbus::Result<Vec<(Vec<u8>, u32, Vec<u8>, u32)>>;
 
     /// Searches property

@@ -11,18 +11,20 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{Connection, Result, proxy};
+use zbus::{proxy, Connection, Result};
 
 impl DHCP4ConfigProxy<'_> {
-    pub async fn new_from_path(device_path: zbus::zvariant::OwnedObjectPath, connection: &Connection) -> Result<DHCP4ConfigProxy<'_>> {
-        DHCP4ConfigProxy::builder(&connection)
-        .path(device_path)
-        .expect("Path not found")
-        .build()
-        .await
+    pub async fn new_from_path(
+        device_path: zbus::zvariant::OwnedObjectPath,
+        connection: &Connection,
+    ) -> Result<DHCP4ConfigProxy<'_>> {
+        DHCP4ConfigProxy::builder(connection)
+            .path(device_path)?
+            .build()
+            .await
     }
 }
-        
+
 #[proxy(
     default_path = "/org/freedesktop/NetworkManager/DHCP4Config",
     default_service = "org.freedesktop.NetworkManager",

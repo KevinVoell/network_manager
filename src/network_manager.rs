@@ -117,7 +117,6 @@ pub mod wireless;
 #[cfg(feature = "wpan")]
 pub mod wpan;
 
-
 pub mod device_type;
 pub mod state;
 

@@ -1,4 +1,5 @@
-use network_manager::{Connection, NetworkManagerProxy, WirelessProxy, AccessPointProxy};
+use network_manager::{AccessPointProxy, NetworkManagerProxy, WirelessProxy};
+use zbus::Connection;
 
 #[tokio::main]
 async fn main() {
@@ -18,16 +19,22 @@ async fn main() {
 
             let access_point_path = wireless_proxy.active_access_point().await;
 
-            let access_point = AccessPointProxy::new_from_path(access_point_path.unwrap(), &connection)
-                .await
-                .expect("Unable to get the access point");
+            let access_point =
+                AccessPointProxy::new_from_path(access_point_path.unwrap(), &connection)
+                    .await
+                    .expect("Unable to get the access point");
 
             let ssid = access_point.ssid().await;
             let frequency = access_point.frequency().await;
             let hw_address = access_point.hw_address().await;
 
-            println!("Access Point: {}\n\tFrequency: {:?}\n\tAddress: {}", String::from_utf8(ssid.unwrap()).unwrap(), frequency.unwrap(), hw_address.unwrap());
-        },
+            println!(
+                "Access Point: {}\n\tFrequency: {:?}\n\tAddress: {}",
+                String::from_utf8(ssid.unwrap()).unwrap(),
+                frequency.unwrap(),
+                hw_address.unwrap()
+            );
+        }
         Err(_) => println!("Wireless device not found!"),
     };
 }

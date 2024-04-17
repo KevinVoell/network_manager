@@ -1,4 +1,12 @@
-workspace = { members = [ "examples/list_access_points", "examples/list_devices", "examples/show_wifi_networks","examples/simple", "examples/wifi_access_points", "examples/wifi_active_ap", "examples/wifi_info"] }
+[workspace]
+members = [
+    "examples/list_devices",
+    "examples/show_wifi_networks",
+    "examples/simple",
+    "examples/wifi_active_ap",
+    "examples/wifi_info",
+]
+
 [package]
 name = "network_manager"
 description = "A crate for interacting with network_manager using zbus"
@@ -7,8 +15,8 @@ edition = "2021"
 license = "MIT"
 homepage = "https://github.com/KevinVoell/network_manager"
 repository = "https://github.com/KevinVoell/network_manager"
-readme = "readme.md"
-keywords = ["network manager", "networking"]
+readme = "README.md"
+keywords = ["network manager", "networking", "zbus"]
 categories = []
 documentation = ""
 
@@ -19,9 +27,11 @@ zbus = "4.1.1"
 bitflags = "1.2"
 
 [features]
+default = ["full"]
 full = [
     "access_point",
     "active",
+    "adsl",
     "agent_manager",
     "bluetooth",
     "bond",
@@ -29,10 +39,45 @@ full = [
     "checkpoint",
     "connection",
     "device",
-
-    "wireless", 
-    "wired"
-    ]
+    "dhcp4config",
+    "dhcp6config",
+    "dummy",
+    "generic",
+    "hsr",
+    "infiniband",
+    "ip4config",
+    "ip6config",
+    "iptunnel",
+    "loopback",
+    "lowpan",
+    "macsec",
+    "macvlan",
+    "modem",
+    "nsp",
+    "olpc_mesh",
+    "ovs_bridge",
+    "ovs_interface",
+    "ovs_port",
+    "plugin",
+    "ppp",
+    "secret_agent",
+    "settings",
+    "statistics",
+    "team",
+    "tun",
+    "verth",
+    "veth",
+    "vlan",
+    "vrf",
+    "vxlan",
+    "wi_max",
+    "wifi_p2p",
+    "wifi_p2ppeer",
+    "wire_guard",
+    "wireless",
+    "wired",
+    "wpan",
+]
 
 access_point = []
 active = []
@@ -71,13 +116,14 @@ statistics = []
 team = []
 tun = []
 verth = []
+veth = []
 vlan = []
 vrf = []
 vxlan = []
 wi_max = []
 wifi_p2p = []
 wifi_p2ppeer = []
-wire_gurard = []
+wire_guard = []
 wireless = []
 wired = []
 wpan = []

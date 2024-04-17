@@ -1,6 +1,5 @@
 mod network_manager;
 
-pub use zbus::{Connection, Result, proxy};
 pub use network_manager::NetworkManagerProxy;
 
 #[cfg(feature = "access_point")]
@@ -81,7 +80,7 @@ pub use network_manager::settings_connection::SettingsConnectionProxy;
 pub use network_manager::statistics::StatisticsProxy;
 #[cfg(feature = "team")]
 pub use network_manager::team::TeamProxy;
-#[cfg(feature = "tum")]
+#[cfg(feature = "tun")]
 pub use network_manager::tun::TunProxy;
 #[cfg(feature = "veth")]
 pub use network_manager::veth::VethProxy;
@@ -108,18 +107,3 @@ pub use network_manager::wpan::WpanProxy;
 
 pub use network_manager::device_type::DeviceType;
 pub use network_manager::state::State;
-
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}

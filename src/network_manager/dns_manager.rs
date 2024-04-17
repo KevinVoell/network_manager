@@ -15,9 +15,8 @@ use zbus::{Connection, Result, proxy};
 
 impl DnsManagerProxy<'_> {
     pub async fn new_from_path(device_path: zbus::zvariant::OwnedObjectPath, connection: &Connection) -> Result<DnsManagerProxy<'_>> {
-        DnsManagerProxy::builder(&connection)
-        .path(device_path)
-        .expect("Path not found")
+        DnsManagerProxy::builder(connection)
+        .path(device_path)?
         .build()
         .await
     }

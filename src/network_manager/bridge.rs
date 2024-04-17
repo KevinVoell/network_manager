@@ -11,18 +11,20 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{Connection, Result, proxy};
+use zbus::{proxy, Connection, Result};
 
 impl BridgeProxy<'_> {
-    pub async fn new_from_path(device_path: zbus::zvariant::OwnedObjectPath, connection: &Connection) -> Result<BridgeProxy<'_>> {
-        BridgeProxy::builder(&connection)
-        .path(device_path)
-        .expect("Path not found")
-        .build()
-        .await
+    pub async fn new_from_path(
+        device_path: zbus::zvariant::OwnedObjectPath,
+        connection: &Connection,
+    ) -> Result<BridgeProxy<'_>> {
+        BridgeProxy::builder(connection)
+            .path(device_path)?
+            .build()
+            .await
     }
 }
-        
+
 #[proxy(
     default_path = "/org/freedesktop/NetworkManager/Device/Bridge",
     default_service = "org.freedesktop.NetworkManager",

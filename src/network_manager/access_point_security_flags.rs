@@ -1,3 +1,4 @@
+#![allow(clippy::bad_bit_mask)]
 use bitflags::bitflags;
 
 bitflags! {
