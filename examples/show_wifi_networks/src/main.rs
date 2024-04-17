@@ -373,7 +373,7 @@ fn flags_to_str(flags: NM80211ApFlags) -> String {
         _ = flags_str.write_str("WPS_PIN");
     }
 
-    if flags_str.len() == 0 {
+    if flags_str.is_empty() {
         _ = flags_str.write_str("None");
     }
 
@@ -439,7 +439,7 @@ fn security_flags_to_str(flags: NM80211ApSecurityFlags) -> String {
         _ = flags_str.write_str("KEY_MGMT_EAP_SUITE_B_192|");
     }
 
-    if flags_str.len() == 0 {
+    if flags_str.is_empty() {
         _ = flags_str.write_str("None");
     }
 
