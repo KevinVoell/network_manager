@@ -167,9 +167,7 @@ async fn print_device_info(
 
     let ap = wireless_proxy.active_access_point().await;
 
-    let active_ap: String;
-
-    match ap {
+    let active_ap = match ap {
         Ok(ap) => {
             let access_point = AccessPointProxy::new_from_path(ap.clone(), connection)
                 .await
@@ -177,13 +175,9 @@ async fn print_device_info(
 
             let ssid = access_point.ssid().await.expect("Could not get SSID");
 
-            active_ap = String::from(format!(
-                "{} ({})",
-                String::from_utf8(ssid).unwrap(),
-                ap.to_string()
-            ));
+            format!("{} ({})", String::from_utf8(ssid).unwrap(), ap)
         }
-        Err(_) => active_ap = String::from("none"),
+        Err(_) => "none".to_string(),
     };
 
     println!(
@@ -232,16 +226,14 @@ async fn print_ap_info(access_point: &AccessPointProxy<'_>, access_point_path: O
         .await
         .expect("Could not get last_seen");
 
-    let last_seen: String;
-
-    if t == 0 {
-        last_seen = String::from("no scan completed");
+    let last_seen = if t == 0 {
+        "no scan completed".to_string()
     } else {
         let last_boot: i32 = get_uptime().as_millis().try_into().unwrap();
 
         let duration = (last_boot / 1000) - t;
-        last_seen = String::from(format!("{} sec ago", duration));
-    }
+        format!("{duration} sec ago")
+    };
 
     println!("----------------------");
     println!("D-Bus path:       {}", access_point_path);
