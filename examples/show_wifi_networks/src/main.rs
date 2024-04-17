@@ -290,7 +290,7 @@ fn ap_security_flags_to_security(
     let mut str = String::new();
 
     if flags.contains(NM80211ApFlags::PRIVACY) && wpa_flags.is_empty() && rsn_flags.is_empty() {
-        str = format!(" WEP");
+        str = " WEP".to_string();
     }
 
     if !wpa_flags.is_empty() {
