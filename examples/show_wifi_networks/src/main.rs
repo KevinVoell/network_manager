@@ -273,12 +273,13 @@ async fn print_ap_info(access_point: &AccessPointProxy<'_>, access_point_path: O
 
 fn mode_to_string(mode: u32) -> String {
     match mode {
-        1 => String::from("ADHOC"),
-        2 => String::from("INFRA"),
-        3 => String::from("AP"),
-        4 => String::from("MESH"),
-        _ => String::from("UNKNOWN"),
+        1 => "ADHOC",
+        2 => "INFRA",
+        3 => "AP",
+        4 => "MESH",
+        _ => "UNKNOWN",
     }
+    .to_string()
 }
 
 fn ap_security_flags_to_security(
