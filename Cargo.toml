@@ -8,7 +8,7 @@ members = [
 ]
 
 [package]
-name = "network_manager"
+name = "rusty_network_manager"
 description = "A crate for interacting with network_manager using zbus"
 version = "0.5.0"
 edition = "2021"
@@ -16,9 +16,8 @@ license = "MIT"
 homepage = "https://github.com/KevinVoell/network_manager"
 repository = "https://github.com/KevinVoell/network_manager"
 readme = "README.md"
-keywords = ["network manager", "networking", "zbus"]
+keywords = ["network_manager", "networking", "zbus"]
 categories = []
-documentation = ""
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

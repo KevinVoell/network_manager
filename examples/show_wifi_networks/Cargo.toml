@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-network_manager = { version = ">=0.1.0", path = "../../../network_manager", features=["wireless", "device", "access_point"] }
+rusty_network_manager = { version = ">=0.1.0", path = "../../../network_manager", features=["wireless", "device", "access_point"] }
 package = "0.0.0"
 tokio = { version = "1.36.0", features = ["full"] }
 tokio-stream = "0.1.14"
