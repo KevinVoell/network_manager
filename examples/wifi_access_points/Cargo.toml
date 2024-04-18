@@ -1,11 +1,12 @@
 [package]
-name = "simple"
+name = "wifi_access_points"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rusty_network_manager = { version = ">=0.1.0", path = "../../../network_manager", features=["device"] }
+rusty_network_manager = { version = ">=0.1.0", path = "../../../network_manager", features=["device", "wireless", "access_point"] }
 tokio = { version = "1.36.0", features = ["full"] }
+tokio-stream = "0.1.14"
 zbus = "4.1.2"

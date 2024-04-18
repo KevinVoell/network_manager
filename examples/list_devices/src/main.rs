@@ -14,7 +14,7 @@
 //! contract, tort, or otherwise, arising from, out of, or in connection with the example code or
 //! the use or other dealings in the example code.
 
-use network_manager::{DeviceProxy, IP4ConfigProxy, NetworkManagerProxy};
+use rusty_network_manager::{DeviceProxy, IP4ConfigProxy, NetworkManagerProxy};
 use std::collections::HashMap;
 use zbus::Connection;
 

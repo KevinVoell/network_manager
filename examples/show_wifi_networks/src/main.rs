@@ -13,7 +13,7 @@
 //! or copyright holders be liable for any claim, damages, or other liability, whether in an action of
 //! contract, tort, or otherwise, arising from, out of, or in connection with the example code or
 //! the use or other dealings in the example code.
-use network_manager::{
+use rusty_network_manager::{
     AccessPointProxy, Channel, DeviceProxy, DeviceType, NM80211ApFlags, NM80211ApSecurityFlags,
     NetworkManagerProxy, WirelessProxy,
 };

@@ -1,4 +1,4 @@
-use network_manager::{AccessPointProxy, NetworkManagerProxy, WirelessProxy};
+use rusty_network_manager::{AccessPointProxy, NetworkManagerProxy, WirelessProxy};
 use zbus::Connection;
 
 #[tokio::main]
