@@ -225,7 +225,7 @@ async fn print_ap_info(access_point: &AccessPointProxy<'_>, access_point_path: O
         .last_seen()
         .await
         .expect("Could not get last_seen")
-        .try_into().unwrap();
+        .into();
 
     let last_seen = if last_seen_time == 0 {
         "no scan completed".to_string()
