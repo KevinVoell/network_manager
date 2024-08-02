@@ -10,7 +10,7 @@ members = [
 [package]
 name = "rusty_network_manager"
 description = "A crate for interacting with network_manager using zbus"
-version = "0.5.1"
+version = "0.5.2"
 edition = "2021"
 license = "MIT"
 homepage = "https://github.com/KevinVoell/network_manager"

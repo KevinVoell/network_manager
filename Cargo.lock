@@ -835,7 +835,7 @@ dependencies = [
 
 [[package]]
 name = "rusty_network_manager"
-version = "0.5.1"
+version = "0.5.2"
 dependencies = [
  "bitflags 2.4.2",
  "zbus",
