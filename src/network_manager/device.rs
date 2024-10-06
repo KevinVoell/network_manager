@@ -64,7 +64,7 @@ pub(crate) trait Device {
     ) -> zbus::Result<()>;
 
     /// StateChanged signal
-    #[zbus(signal, name = "state_changed")]
+    #[zbus(signal, name = "StateChanged")]
     fn device_state_changed(&self, new_state: u32, old_state: u32, reason: u32)
         -> zbus::Result<()>;
 
