@@ -1,8 +1,10 @@
 [workspace]
 members = [
+    "examples/list_access_points",
     "examples/list_devices",
     "examples/show_wifi_networks",
     "examples/simple",
+    "examples/wifi_access_points",
     "examples/wifi_active_ap",
     "examples/wifi_info",
 ]

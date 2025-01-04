@@ -17,8 +17,8 @@ use std::env;
 use std::sync::Mutex;
 use std::collections::HashMap;
 use tokio_stream::StreamExt;
-use network_manager::{Connection, NetworkManagerProxy, WirelessProxy, AccessPointProxy};
-use zbus::proxy::PropertyChanged;
+use rusty_network_manager::{NetworkManagerProxy, WirelessProxy, AccessPointProxy};
+use zbus::{Connection, proxy::PropertyChanged};
 
 #[tokio::main]
 async fn main() {
@@ -47,7 +47,6 @@ async fn main() {
 
 async fn request_scan(wireless_proxy: &WirelessProxy<'_>) {
     let last_scan = wireless_proxy.last_scan().await;
-
 
     tokio::time::sleep(tokio::time::Duration::from_millis(5000)).await;
     let options = HashMap::new();

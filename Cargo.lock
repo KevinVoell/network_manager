@@ -540,6 +540,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "01cda141df6706de531b6c46c3a33ecca755538219bd484262fa09410c13539c"
 
 [[package]]
+name = "list_access_points"
+version = "0.1.0"
+dependencies = [
+ "rusty_network_manager",
+ "tokio",
+ "tokio-stream",
+ "zbus",
+]
+
+[[package]]
 name = "list_devices"
 version = "0.1.0"
 dependencies = [
@@ -1106,6 +1116,16 @@ name = "wasi"
 version = "0.11.0+wasi-snapshot-preview1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
+
+[[package]]
+name = "wifi_access_points"
+version = "0.1.0"
+dependencies = [
+ "rusty_network_manager",
+ "tokio",
+ "tokio-stream",
+ "zbus",
+]
 
 [[package]]
 name = "wifi_active_ap"

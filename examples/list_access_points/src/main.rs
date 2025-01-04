@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use tokio_stream::StreamExt;
-use network_manager::{Connection, NetworkManagerProxy, WirelessProxy, AccessPointProxy};
+use rusty_network_manager::{NetworkManagerProxy, WirelessProxy, AccessPointProxy};
+use zbus::Connection;
 
 #[tokio::main]
 async fn main() {
