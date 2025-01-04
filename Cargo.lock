@@ -611,25 +611,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "01cda141df6706de531b6c46c3a33ecca755538219bd484262fa09410c13539c"
 
 [[package]]
-name = "list_access_points"
-version = "0.1.0"
-dependencies = [
- "rusty_network_manager",
- "tokio",
- "tokio-stream",
- "zbus",
-]
-
-[[package]]
-name = "list_devices"
-version = "0.1.0"
-dependencies = [
- "rusty_network_manager",
- "tokio",
- "zbus",
-]
-
-[[package]]
 name = "lock_api"
 version = "0.4.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -764,12 +745,6 @@ dependencies = [
  "futures-core",
  "pin-project-lite",
 ]
-
-[[package]]
-name = "package"
-version = "0.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f576c01f4729e6e9fdd95c9fe0d9e6be1c66182b8d6b15b830feac95aec402d2"
 
 [[package]]
 name = "parking"
@@ -980,6 +955,8 @@ dependencies = [
  "bindgen",
  "bitflags 2.4.2",
  "num_enum",
+ "tokio",
+ "tokio-stream",
  "zbus",
 ]
 
@@ -1038,32 +1015,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
 
 [[package]]
-name = "show_wifi_networks"
-version = "0.1.0"
-dependencies = [
- "package",
- "rusty_network_manager",
- "tokio",
- "tokio-stream",
- "zbus",
-]
-
-[[package]]
 name = "signal-hook-registry"
 version = "1.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d8229b473baa5980ac72ef434c4415e70c4b5e71b423043adb4ba059f89c99a1"
 dependencies = [
  "libc",
-]
-
-[[package]]
-name = "simple"
-version = "0.1.0"
-dependencies = [
- "rusty_network_manager",
- "tokio",
- "zbus",
 ]
 
 [[package]]
@@ -1254,34 +1211,6 @@ name = "wasi"
 version = "0.11.0+wasi-snapshot-preview1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
-
-[[package]]
-name = "wifi_access_points"
-version = "0.1.0"
-dependencies = [
- "rusty_network_manager",
- "tokio",
- "tokio-stream",
- "zbus",
-]
-
-[[package]]
-name = "wifi_active_ap"
-version = "0.1.0"
-dependencies = [
- "rusty_network_manager",
- "tokio",
- "zbus",
-]
-
-[[package]]
-name = "wifi_info"
-version = "0.1.0"
-dependencies = [
- "rusty_network_manager",
- "tokio",
- "zbus",
-]
 
 [[package]]
 name = "winapi"
