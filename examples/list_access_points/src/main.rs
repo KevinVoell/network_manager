@@ -1,6 +1,6 @@
+use rusty_network_manager::{AccessPointProxy, NetworkManagerProxy, WirelessProxy};
 use std::collections::HashMap;
 use tokio_stream::StreamExt;
-use rusty_network_manager::{NetworkManagerProxy, WirelessProxy, AccessPointProxy};
 use zbus::Connection;
 
 #[tokio::main]
@@ -20,26 +20,32 @@ async fn main() {
                 .expect("Unable to get wireless proxy");
 
             let options = HashMap::new();
-            wireless_proxy.request_scan(options).await.expect("Could not request scan, try running as sudo.");
+            wireless_proxy
+                .request_scan(options)
+                .await
+                .expect("Could not request scan, try running as sudo.");
 
-            let mut access_points_changed = wireless_proxy.receive_access_point_added().await.expect("We got here!");
+            let mut access_points_changed = wireless_proxy
+                .receive_access_point_added()
+                .await
+                .expect("We got here!");
             while let Some(v) = access_points_changed.next().await {
                 println!("{}", v.message());
             }
 
             // Get notified when scan is complete
             let mut scan_changed = wireless_proxy.receive_last_scan_changed().await;
-            
+
             let mut count = 0;
             while let Some(v) = scan_changed.next().await {
                 println!("{}", v.name());
                 println!("scan changed: {:?}", v.get().await);
                 count += 1;
                 if count >= 2 {
-                  //  break;
+                    //  break;
                 }
             }
-            
+
             let access_points = wireless_proxy.get_all_access_points().await;
             //println!("AccessPoints: {:?}", access_points);
             for access_point_path in access_points.unwrap() {
@@ -56,9 +62,14 @@ async fn main() {
                     continue;
                 }
 
-                println!("Access Point: {}\n\tFrequency: {:?}\n\tAddress: {}", ssid_string, frequency.unwrap(), hw_address.unwrap());
+                println!(
+                    "Access Point: {}\n\tFrequency: {:?}\n\tAddress: {}",
+                    ssid_string,
+                    frequency.unwrap(),
+                    hw_address.unwrap()
+                );
             }
-        },
+        }
         Err(_) => println!("No access points found"),
     };
 }
