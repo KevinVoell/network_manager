@@ -127,8 +127,8 @@ struct VariantComment {
     comment: String,
 }
 fn process_variant_comment(variant_comment: String) -> VariantComment {
-    let (variant, comment) = variant_comment.split_once(":").unwrap();
-    let variant = variant.split_once("@").unwrap().1;
+    let (variant, comment) = variant_comment.split_once(':').unwrap();
+    let variant = variant.split_once('@').unwrap().1;
     VariantComment {
         variant: variant.to_owned(),
         comment: comment.to_owned(),
@@ -171,7 +171,7 @@ fn fix_docstrings(original: &Path, output: &Path) {
                     line if line.contains(VARIANT_COMMENT_START) => break 'variant_comment_lines,
                     _ => {
                         let comment_line = lines.pop_front().unwrap();
-                        variant.push_str("\n");
+                        variant.push('\n');
                         variant.push_str(comment_line);
                     }
                 }
@@ -192,7 +192,7 @@ fn fix_docstrings(original: &Path, output: &Path) {
             .enumerate()
             .find_map(|(idx, line)| {
                 (line.contains(&vc.variant) && !(line.starts_with(" *") || line.starts_with("/**")))
-                    .then(|| idx)
+                    .then_some(idx)
             })
             .unwrap();
         processed_file.insert(line_idx, format!("/**\n{}\n**/", vc.comment));
