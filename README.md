@@ -18,7 +18,6 @@ through NetworkManager.
 Before you can use this project, ensure you have the following installed:
 - Rust and Cargo (latest stable version recommended)
 - NetworkManager on your Linux distribution
-- zbus
 
 ## Installation
 
