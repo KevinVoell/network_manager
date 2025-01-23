@@ -105,5 +105,4 @@ pub use network_manager::wireless::WirelessProxy;
 #[cfg(feature = "wpan")]
 pub use network_manager::wpan::WpanProxy;
 
-pub use network_manager::device_type::DeviceType;
-pub use network_manager::state::State;
+pub use network_manager::dbus_interface_types;

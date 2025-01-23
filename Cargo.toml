@@ -12,7 +12,7 @@ members = [
 [package]
 name = "rusty_network_manager"
 description = "A crate for interacting with network_manager using zbus"
-version = "0.5.3"
+version = "0.6.0"
 edition = "2021"
 license = "MIT"
 homepage = "https://github.com/KevinVoell/network_manager"
@@ -26,6 +26,10 @@ categories = []
 [dependencies]
 zbus = "4.1.1"
 bitflags = "2"
+num_enum = "0.7.3"
+
+[build-dependencies]
+bindgen = "0.71.1"
 
 [features]
 default = ["full"]

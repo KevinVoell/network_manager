@@ -14,8 +14,8 @@
 //! contract, tort, or otherwise, arising from, out of, or in connection with the example code or
 //! the use or other dealings in the example code.
 use rusty_network_manager::{
-    AccessPointProxy, Channel, DeviceProxy, DeviceType, NM80211ApFlags, NM80211ApSecurityFlags,
-    NetworkManagerProxy, WirelessProxy,
+    dbus_interface_types::NMDeviceType, AccessPointProxy, Channel, DeviceProxy, NM80211ApFlags,
+    NM80211ApSecurityFlags, NetworkManagerProxy, WirelessProxy,
 };
 use std::collections::HashMap;
 use std::fmt::Write;
@@ -45,15 +45,15 @@ async fn main() {
             .await
             .expect("Could not get device");
 
-        let device_type = DeviceType::from_code(device.device_type().await.unwrap());
+        let device_type = NMDeviceType::try_from(device.device_type().await.unwrap());
 
         match device_type {
-            Some(x) => {
-                if x != DeviceType::WiFi {
+            Ok(x) => {
+                if x != NMDeviceType::WIFI {
                     continue;
                 }
             }
-            None => continue,
+            Err(_) => continue,
         };
 
         if !is_first {

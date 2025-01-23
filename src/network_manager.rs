@@ -117,8 +117,13 @@ pub mod wireless;
 #[cfg(feature = "wpan")]
 pub mod wpan;
 
-pub mod device_type;
-pub mod state;
+#[allow(non_camel_case_types)]
+#[allow(unused)]
+pub mod dbus_interface_types {
+    use num_enum::TryFromPrimitive;
+
+    include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+}
 
 use zbus::proxy;
 
