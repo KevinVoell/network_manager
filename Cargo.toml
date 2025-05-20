@@ -13,7 +13,7 @@ categories = []
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-zbus = "5.5.0"
+zbus = "5.7.0"
 bitflags = "2"
 num_enum = "0.7.3"
 
@@ -21,9 +21,9 @@ num_enum = "0.7.3"
 bindgen = "0.71.1"
 
 [dev-dependencies]
-tokio = { version = "1.36.0", features = ["full"] }
-tokio-stream = "0.1.14"
-zbus = "5.5.0"
+tokio = { version = "1.45.0", features = ["full"] }
+tokio-stream = "0.1.17"
+zbus = "5.7.0"
 
 [features]
 default = ["full"]
