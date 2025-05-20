@@ -11,7 +11,7 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl OvsPortProxy<'_> {
     pub async fn new_from_path(
@@ -31,7 +31,7 @@ impl OvsPortProxy<'_> {
     interface = "org.freedesktop.NetworkManager.Device.OvsPort",
     assume_defaults = true
 )]
-trait OvsPort {
+pub trait OvsPort {
     /// Slaves property
     #[zbus(property)]
     fn slaves(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;

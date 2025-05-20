@@ -11,7 +11,7 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl MacvlanProxy<'_> {
     pub async fn new_from_path(
@@ -31,7 +31,7 @@ impl MacvlanProxy<'_> {
     interface = "org.freedesktop.NetworkManager.Device.Macvlan",
     assume_defaults = true
 )]
-trait Macvlan {
+pub trait Macvlan {
     /// Mode property
     #[zbus(property)]
     fn mode(&self) -> zbus::Result<String>;

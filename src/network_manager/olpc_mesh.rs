@@ -11,7 +11,7 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl OlpcMeshProxy<'_> {
     pub async fn getnew_from_path_proxy(
@@ -31,7 +31,7 @@ impl OlpcMeshProxy<'_> {
     interface = "org.freedesktop.NetworkManager.Device.OlpcMesh",
     assume_defaults = true
 )]
-trait OlpcMesh {
+pub trait OlpcMesh {
     /// ActiveChannel property
     #[zbus(property)]
     fn active_channel(&self) -> zbus::Result<u32>;

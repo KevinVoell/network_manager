@@ -11,7 +11,7 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl BridgeProxy<'_> {
     pub async fn new_from_path(
@@ -31,7 +31,7 @@ impl BridgeProxy<'_> {
     interface = "org.freedesktop.NetworkManager.Device.Bridge",
     assume_defaults = true
 )]
-trait Bridge {
+pub trait Bridge {
     /// Carrier property
     #[zbus(property)]
     fn carrier(&self) -> zbus::Result<bool>;

@@ -11,7 +11,7 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl WifiP2PProxy<'_> {
     pub async fn new_from_path(
@@ -31,7 +31,7 @@ impl WifiP2PProxy<'_> {
     interface = "org.freedesktop.NetworkManager.Device.WifiP2P",
     assume_defaults = true
 )]
-trait WifiP2P {
+pub trait WifiP2P {
     /// StartFind method
     fn start_find(
         &self,

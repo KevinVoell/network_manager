@@ -11,7 +11,7 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl HsrProxy<'_> {
     pub async fn new_from_path(
@@ -31,7 +31,7 @@ impl HsrProxy<'_> {
     interface = "org.freedesktop.NetworkManager.Device.Hsr",
     assume_defaults = true
 )]
-trait Hsr {
+pub trait Hsr {
     /// MulticastSpec property
     #[zbus(property)]
     fn multicast_spec(&self) -> zbus::Result<u8>;

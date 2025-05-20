@@ -11,7 +11,7 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl SecretAgentProxy<'_> {
     pub async fn new_from_path(
@@ -31,7 +31,7 @@ impl SecretAgentProxy<'_> {
     interface = "org.freedesktop.NetworkManager.SecretAgent",
     assume_defaults = true
 )]
-trait SecretAgent {
+pub trait SecretAgent {
     /// CancelGetSecrets method
     fn cancel_get_secrets(
         &self,

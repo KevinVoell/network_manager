@@ -11,7 +11,7 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl DHCP4ConfigProxy<'_> {
     pub async fn new_from_path(
@@ -31,7 +31,7 @@ impl DHCP4ConfigProxy<'_> {
     interface = "org.freedesktop.NetworkManager.DHCP4Config",
     assume_defaults = true
 )]
-trait DHCP4Config {
+pub trait DHCP4Config {
     /// Options property
     #[zbus(property)]
     fn options(

@@ -12,7 +12,7 @@
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
 
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl SettingsConnectionProxy<'_> {
     pub async fn new_from_path(
@@ -32,7 +32,7 @@ impl SettingsConnectionProxy<'_> {
     interface = "org.freedesktop.NetworkManager.Settings.Connection",
     assume_defaults = true
 )]
-trait SettingsConnection {
+pub trait SettingsConnection {
     /// ClearSecrets method
     fn clear_secrets(&self) -> zbus::Result<()>;
 

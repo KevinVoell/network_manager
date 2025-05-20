@@ -11,7 +11,7 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl CheckpointProxy<'_> {
     pub async fn new_from_path(
@@ -31,7 +31,7 @@ impl CheckpointProxy<'_> {
     interface = "org.freedesktop.NetworkManager.Checkpoint",
     assume_defaults = true
 )]
-trait Checkpoint {
+pub trait Checkpoint {
     /// Created property
     #[zbus(property)]
     fn created(&self) -> zbus::Result<i64>;

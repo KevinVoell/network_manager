@@ -14,21 +14,24 @@
 use zbus::{Connection, Result, proxy};
 
 impl DnsManagerProxy<'_> {
-    pub async fn new_from_path(device_path: zbus::zvariant::OwnedObjectPath, connection: &Connection) -> Result<DnsManagerProxy<'_>> {
+    pub async fn new_from_path(
+        device_path: zbus::zvariant::OwnedObjectPath,
+        connection: &Connection,
+    ) -> Result<DnsManagerProxy<'_>> {
         DnsManagerProxy::builder(connection)
-        .path(device_path)?
-        .build()
-        .await
+            .path(device_path)?
+            .build()
+            .await
     }
 }
-        
+
 #[proxy(
     default_path = "/org/freedesktop/NetworkManager/DnsManager",
     default_service = "org.freedesktop.NetworkManager",
     interface = "org.freedesktop.NetworkManager.DnsManager",
     assume_defaults = true
 )]
-trait DnsManager {
+pub trait DnsManager {
     /// Configuration property
     #[zbus(property)]
     fn configuration(

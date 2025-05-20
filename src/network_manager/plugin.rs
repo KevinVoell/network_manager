@@ -30,7 +30,7 @@ impl PluginProxy<'_> {
     interface = "org.freedesktop.NetworkManager.VPN.Plugin",
     assume_defaults = true
 )]
-pub(crate) trait Plugin {
+pub trait Plugin {
     /// Connect method
     fn connect(
         &self,

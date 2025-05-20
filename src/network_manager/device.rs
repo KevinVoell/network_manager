@@ -12,7 +12,7 @@
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
 
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl DeviceProxy<'_> {
     pub async fn new_from_path(
@@ -32,7 +32,7 @@ impl DeviceProxy<'_> {
     interface = "org.freedesktop.NetworkManager.Device",
     assume_defaults = true
 )]
-pub(crate) trait Device {
+pub trait Device {
     /// Delete method
     fn delete(&self) -> zbus::Result<()>;
 
@@ -66,7 +66,7 @@ pub(crate) trait Device {
     /// StateChanged signal
     #[zbus(signal, name = "StateChanged")]
     fn device_state_changed(&self, new_state: u32, old_state: u32, reason: u32)
-        -> zbus::Result<()>;
+    -> zbus::Result<()>;
 
     /// ActiveConnection property
     #[zbus(property)]

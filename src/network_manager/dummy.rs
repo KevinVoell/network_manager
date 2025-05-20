@@ -11,7 +11,7 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl DummyProxy<'_> {
     pub async fn new_from_path(
@@ -31,7 +31,7 @@ impl DummyProxy<'_> {
     interface = "org.freedesktop.NetworkManager.Device.Dummy",
     assume_defaults = true
 )]
-trait Dummy {
+pub trait Dummy {
     /// HwAddress property
     #[zbus(property)]
     fn hw_address(&self) -> zbus::Result<String>;

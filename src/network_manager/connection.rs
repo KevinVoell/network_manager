@@ -11,7 +11,7 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl ConnectionProxy<'_> {
     pub async fn new_from_path(
@@ -31,7 +31,7 @@ impl ConnectionProxy<'_> {
     interface = "org.freedesktop.NetworkManager.VPN.Connection",
     assume_defaults = true
 )]
-trait Connection {
+pub trait Connection {
     /// VpnStateChanged signal
     #[zbus(signal, name = "vpn_state_changed")]
     fn vpn_vpn_state_changed(&self, state: u32, reason: u32) -> zbus::Result<()>;

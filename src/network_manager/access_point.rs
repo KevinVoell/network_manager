@@ -12,7 +12,7 @@
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
 
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl AccessPointProxy<'_> {
     pub async fn new_from_path(
@@ -32,7 +32,7 @@ impl AccessPointProxy<'_> {
     interface = "org.freedesktop.NetworkManager.AccessPoint",
     assume_defaults = true
 )]
-trait AccessPoint {
+pub trait AccessPoint {
     /// Bandwidth property
     #[zbus(property)]
     fn bandwidth(&self) -> zbus::Result<u32>;

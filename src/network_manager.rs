@@ -128,7 +128,7 @@ pub mod dbus_interface_types {
 use zbus::proxy;
 
 #[proxy(interface = "org.freedesktop.NetworkManager", assume_defaults = true)]
-pub(crate) trait NetworkManager {
+pub trait NetworkManager {
     /// ActivateConnection method
     fn activate_connection(
         &self,

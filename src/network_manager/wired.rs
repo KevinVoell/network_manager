@@ -11,7 +11,7 @@
 //!
 //! [Writing a client proxy]: https://dbus2.github.io/zbus/client.html
 //! [D-Bus standard interfaces]: https://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces,
-use zbus::{proxy, Connection, Result};
+use zbus::{Connection, Result, proxy};
 
 impl WiredProxy<'_> {
     pub async fn new_from_path(
@@ -31,7 +31,7 @@ impl WiredProxy<'_> {
     interface = "org.freedesktop.NetworkManager.Device.Wired",
     assume_defaults = true
 )]
-trait Wired {
+pub trait Wired {
     /// Carrier property
     #[zbus(property)]
     fn carrier(&self) -> zbus::Result<bool>;
