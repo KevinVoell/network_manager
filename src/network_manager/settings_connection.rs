@@ -68,7 +68,7 @@ trait SettingsConnection {
         &self,
         properties: std::collections::HashMap<
             &str,
-            std::collections::HashMap<&str, &zbus::zvariant::Value<'_>>,
+            std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
         >,
     ) -> zbus::Result<()>;
 
@@ -77,10 +77,10 @@ trait SettingsConnection {
         &self,
         settings: std::collections::HashMap<
             &str,
-            std::collections::HashMap<&str, &zbus::zvariant::Value<'_>>,
+            std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
         >,
         flags: u32,
-        args: std::collections::HashMap<&str, &zbus::zvariant::Value<'_>>,
+        args: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
     ) -> zbus::Result<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>;
 
     /// UpdateUnsaved method
@@ -88,7 +88,7 @@ trait SettingsConnection {
         &self,
         properties: std::collections::HashMap<
             &str,
-            std::collections::HashMap<&str, &zbus::zvariant::Value<'_>>,
+            std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
         >,
     ) -> zbus::Result<()>;
 
