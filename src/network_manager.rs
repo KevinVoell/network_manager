@@ -325,10 +325,6 @@ pub trait NetworkManager {
     #[zbus(property)]
     fn startup(&self) -> zbus::Result<bool>;
 
-    /// State property
-    // #[zbus(property)]
-    // fn state(&self) -> zbus::Result<u32>;
-
     /// Version property
     #[zbus(property)]
     fn version(&self) -> zbus::Result<String>;
