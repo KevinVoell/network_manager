@@ -39,11 +39,13 @@ async fn main() {
     };
 }
 
-async fn connect(nm: &NetworkManagerProxy<'_>, wireless_interface_path: zbus::zvariant::OwnedObjectPath) {
-
+async fn connect(
+    nm: &NetworkManagerProxy<'_>,
+    wireless_interface_path: zbus::zvariant::OwnedObjectPath,
+) {
     let args: Vec<String> = env::args().collect();
 
-    if &args.len() != &4 {
+    if args.len() != 4 {
         eprintln!("Usage: ./add_connection <connection_name> <ssid> <psk>");
         eprintln!("Example: ./add_connection MyConnectionName MySSID MyPassword");
         std::process::exit(1);
@@ -82,7 +84,11 @@ async fn connect(nm: &NetworkManagerProxy<'_>, wireless_interface_path: zbus::zv
 
     let specific_object = zbus::zvariant::OwnedObjectPath::try_from("/").unwrap();
 
-    nm.add_and_activate_connection(connection_settings, &wireless_interface_path, &specific_object)
-        .await
-        .expect("Could not add and activate connection");
+    nm.add_and_activate_connection(
+        connection_settings,
+        &wireless_interface_path,
+        &specific_object,
+    )
+    .await
+    .expect("Could not add and activate connection");
 }
