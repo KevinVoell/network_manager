@@ -14,16 +14,16 @@
 //! contract, tort, or otherwise, arising from, out of, or in connection with the example code or
 //! the use or other dealings in the example code.
 use rusty_network_manager::{
-    dbus_interface_types::NMDeviceType, AccessPointProxy, Channel, DeviceProxy, NM80211ApFlags,
-    NM80211ApSecurityFlags, NetworkManagerProxy, WirelessProxy,
+    AccessPointProxy, Channel, DeviceProxy, NM80211ApFlags, NM80211ApSecurityFlags,
+    NetworkManagerProxy, WirelessProxy, dbus_interface_types::NMDeviceType,
 };
 use std::collections::HashMap;
 use std::fmt::Write;
 use std::fs::File;
 use std::io::Read;
 use std::time::Duration;
-use zbus::zvariant::OwnedObjectPath;
 use zbus::Connection;
+use zbus::zvariant::OwnedObjectPath;
 
 const SCAN_THRESHOLD_MSEC: u128 = 10_000;
 
