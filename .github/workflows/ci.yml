@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         rust:
-          - 1.75.0
+          - 1.87.0
           - stable
           - beta
           # - nightly
@@ -42,13 +42,13 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      RUSTUP_TOOLCHAIN: 1.75.0
+      RUSTUP_TOOLCHAIN: 1.87.0
 
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: 1.75.0
+          toolchain: 1.87.0
           components: rustfmt
       - name: cargo-fmt
         run: cargo fmt -- --check
@@ -59,7 +59,7 @@ jobs:
     strategy:
       matrix:
         rust:
-          - 1.75.0
+          - 1.87.0
           - stable
           - beta
           # - nightly
@@ -82,13 +82,13 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      RUSTUP_TOOLCHAIN: 1.75.0
+      RUSTUP_TOOLCHAIN: 1.87.0
 
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: 1.75.0
+          toolchain: 1.87.0
           components: clippy
       - uses: swatinem/rust-cache@v2
       - name: cargo-clippy
