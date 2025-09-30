@@ -14,6 +14,14 @@
 
 use zbus::{Connection, Result, proxy};
 
+use super::device_state::DeviceState;
+use super::device_type::DeviceType;
+use super::device_capabilities::DeviceCapabilities;
+use super::device_state_reason::DeviceStateReason;
+use super::metered::Metered;
+use super::connectivity_state::ConnectivityState;
+use super::device_interface_flags::DeviceInterfaceFlags;
+
 impl DeviceProxy<'_> {
     pub async fn new_from_path(
         device_path: zbus::zvariant::OwnedObjectPath,
@@ -23,6 +31,54 @@ impl DeviceProxy<'_> {
             .path(device_path)?
             .build()
             .await
+    }
+
+    /// Get the device state as a typed enum
+    pub async fn get_state(&self) -> Result<DeviceState> {
+        let state_value = self.state().await?;
+        Ok(DeviceState::from(state_value))
+    }
+
+    /// Get the device type as a typed enum
+    pub async fn get_device_type(&self) -> Result<DeviceType> {
+        let type_value = self.device_type().await?;
+        Ok(DeviceType::from(type_value))
+    }
+
+    /// Get the device capabilities as typed bitflags
+    pub async fn get_capabilities(&self) -> Result<DeviceCapabilities> {
+        let caps_value = self.capabilities().await?;
+        Ok(DeviceCapabilities::from(caps_value))
+    }
+
+    /// Get the device state reason as a typed tuple (state, reason)
+    pub async fn get_state_reason(&self) -> Result<(DeviceState, DeviceStateReason)> {
+        let (state_value, reason_value) = self.state_reason().await?;
+        Ok((DeviceState::from(state_value), DeviceStateReason::from(reason_value)))
+    }
+
+    /// Get the metered status as a typed enum
+    pub async fn get_metered(&self) -> Result<Metered> {
+        let metered_value = self.metered().await?;
+        Ok(Metered::from(metered_value))
+    }
+
+    /// Get the IPv4 connectivity state as a typed enum
+    pub async fn get_ip4_connectivity(&self) -> Result<ConnectivityState> {
+        let connectivity_value = self.ip4_connectivity().await?;
+        Ok(ConnectivityState::from(connectivity_value))
+    }
+
+    /// Get the IPv6 connectivity state as a typed enum
+    pub async fn get_ip6_connectivity(&self) -> Result<ConnectivityState> {
+        let connectivity_value = self.ip6_connectivity().await?;
+        Ok(ConnectivityState::from(connectivity_value))
+    }
+
+    /// Get the interface flags as typed bitflags
+    pub async fn get_interface_flags(&self) -> Result<DeviceInterfaceFlags> {
+        let flags_value = self.interface_flags().await?;
+        Ok(DeviceInterfaceFlags::from(flags_value))
     }
 }
 

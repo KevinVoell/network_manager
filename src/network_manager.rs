@@ -40,6 +40,21 @@ pub mod checkpoint;
 pub mod connection;
 #[cfg(feature = "device")]
 pub mod device;
+#[cfg(feature = "device")]
+pub mod device_state;
+#[cfg(feature = "device")]
+pub mod device_type;
+#[cfg(feature = "device")]
+pub mod device_capabilities;
+#[cfg(feature = "device")]
+pub mod device_state_reason;
+#[cfg(feature = "device")]
+pub mod metered;
+#[cfg(feature = "device")]
+pub mod connectivity_state;
+#[cfg(feature = "device")]
+pub mod device_interface_flags;
+pub mod connection_settings;
 #[cfg(feature = "dhcp4config")]
 pub mod dhcp4config;
 #[cfg(feature = "dhcp6config")]
@@ -126,6 +141,8 @@ pub mod dbus_interface_types {
 }
 
 use zbus::proxy;
+
+use connection_settings::{ConnectionProfile};
 
 #[proxy(interface = "org.freedesktop.NetworkManager", assume_defaults = true)]
 pub trait NetworkManager {
@@ -362,4 +379,70 @@ pub trait NetworkManager {
     /// WwanHardwareEnabled property
     #[zbus(property)]
     fn wwan_hardware_enabled(&self) -> zbus::Result<bool>;
+}
+
+impl NetworkManagerProxy<'_> {
+    /// Add and activate a connection using typed parameters
+    /// 
+    /// This is a typed wrapper around the raw `add_and_activate_connection` method.
+    /// Instead of working with nested HashMaps, you can use the structured `ConnectionProfile` type.
+    /// 
+    /// # Arguments
+    /// * `profile` - Typed connection profile configuration
+    /// * `device` - Device object path to activate the connection on
+    /// * `specific_object` - Specific object path (usually "/" for most connections)
+    /// 
+    /// # Returns
+    /// Returns a tuple of (active_connection_path, connection_path)
+    /// 
+    /// # Example
+    /// ```rust,no_run
+    /// use rusty_network_manager::{NetworkManagerProxy, ConnectionProfile};
+    /// use zbus::Connection;
+    /// 
+    /// # async fn example() -> zbus::Result<()> {
+    /// let connection = Connection::system().await?;
+    /// let nm = NetworkManagerProxy::new(&connection).await?;
+    /// 
+    /// // Create a WiFi profile
+    /// let profile = ConnectionProfile::new_wifi_wpa2(
+    ///     "MyWiFi".to_string(),
+    ///     "MySSID".to_string(), 
+    ///     "mypassword".to_string()
+    /// );
+    /// 
+    /// let device_path = "/org/freedesktop/NetworkManager/Devices/2".try_into()?;
+    /// let specific_object = "/".try_into()?;
+    /// 
+    /// let (active_conn, conn_path) = nm.add_and_activate_connection_typed(
+    ///     profile, 
+    ///     &device_path, 
+    ///     &specific_object
+    /// ).await?;
+    /// # Ok(())
+    /// # }
+    /// ```
+    pub async fn add_and_activate_connection_typed(
+        &self,
+        profile: ConnectionProfile,
+        device: &zbus::zvariant::ObjectPath<'_>,
+        specific_object: &zbus::zvariant::ObjectPath<'_>,
+    ) -> zbus::Result<(
+        zbus::zvariant::OwnedObjectPath,
+        zbus::zvariant::OwnedObjectPath,
+    )> {
+        // Convert typed profile to HashMap format
+        let settings: std::collections::HashMap<String, std::collections::HashMap<String, zbus::zvariant::Value<'static>>> = profile.into();
+        
+        // Convert to the format expected by the D-Bus method
+        let connection_settings: std::collections::HashMap<&str, std::collections::HashMap<&str, zbus::zvariant::Value<'_>>> = 
+            settings.iter().map(|(k, v)| {
+                let inner: std::collections::HashMap<&str, zbus::zvariant::Value<'_>> = 
+                    v.iter().map(|(ik, iv)| (ik.as_str(), iv.clone())).collect();
+                (k.as_str(), inner)
+            }).collect();
+
+        // Call the original method
+        self.add_and_activate_connection(connection_settings, device, specific_object).await
+    }
 }

@@ -28,6 +28,25 @@ pub use network_manager::checkpoint::CheckpointProxy;
 pub use network_manager::connection::ConnectionProxy;
 #[cfg(feature = "device")]
 pub use network_manager::device::DeviceProxy;
+#[cfg(feature = "device")]
+pub use network_manager::device_state::DeviceState;
+#[cfg(feature = "device")]
+pub use network_manager::device_type::DeviceType;
+#[cfg(feature = "device")]
+pub use network_manager::device_capabilities::DeviceCapabilities;
+#[cfg(feature = "device")]
+pub use network_manager::device_state_reason::DeviceStateReason;
+#[cfg(feature = "device")]
+pub use network_manager::metered::Metered;
+#[cfg(feature = "device")]
+pub use network_manager::connectivity_state::ConnectivityState;
+#[cfg(feature = "device")]
+pub use network_manager::device_interface_flags::DeviceInterfaceFlags;
+pub use network_manager::connection_settings::{
+    ConnectionProfile, ConnectionSettings, ConnectionType, WirelessSettings, 
+    WirelessSecuritySettings, WirelessMode, WirelessBand, KeyManagement, 
+    WepKeyType, AuthAlgorithm, IpSettings, IpMethod, IpAddress, IpRoute
+};
 #[cfg(feature = "dhcp4config")]
 pub use network_manager::dhcp4config::DHCP4ConfigProxy;
 #[cfg(feature = "dhcp6config")]

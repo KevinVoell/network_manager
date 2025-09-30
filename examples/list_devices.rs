@@ -2,6 +2,7 @@
 //!
 //! Rust example that lists the available interfaces as
 //! well as some basic information about those interfaces.
+//! This example demonstrates the use of typed enums for device properties.
 //!
 //! This example is based off an official example written in Python available here:
 //! https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/main/examples/python/dbus/list-devices.py
@@ -14,8 +15,10 @@
 //! contract, tort, or otherwise, arising from, out of, or in connection with the example code or
 //! the use or other dealings in the example code.
 
-use rusty_network_manager::{DeviceProxy, IP4ConfigProxy, NetworkManagerProxy};
-use std::collections::HashMap;
+use rusty_network_manager::{
+    DeviceProxy, DeviceState, DeviceCapabilities, Metered, ConnectivityState,
+    DeviceInterfaceFlags, IP4ConfigProxy, NetworkManagerProxy
+};
 use zbus::Connection;
 
 #[tokio::main]
@@ -28,9 +31,6 @@ async fn main() {
         .await
         .expect("Could not get NetworkManager");
 
-    let devtypes = get_devtypes();
-    let states = get_states();
-
     for device in nm.get_all_devices().await.expect("Could not find devices") {
         let device_proxy = DeviceProxy::new_from_path(device, &connection)
             .await
@@ -39,23 +39,99 @@ async fn main() {
         println!("============================");
         println!("Interface: {}", device_proxy.interface().await.unwrap());
 
+        // Use typed methods instead of raw u32 values
+        let device_type = device_proxy.get_device_type().await.unwrap();
+        let device_state = device_proxy.get_state().await.unwrap();
+        let capabilities = device_proxy.get_capabilities().await.unwrap();
+        let metered = device_proxy.get_metered().await.unwrap();
+        let interface_flags = device_proxy.get_interface_flags().await.unwrap();
+
+        println!("Type: {}", device_type);
+        println!("State: {}", device_state);
+        
+        // Show additional typed information
+        println!("Capabilities: {}", capabilities);
+        println!("Metered: {}", metered);
+        println!("Interface Flags: {}", interface_flags);
+
+        // Get connectivity information
+        let ip4_connectivity = device_proxy.get_ip4_connectivity().await.unwrap();
+        let ip6_connectivity = device_proxy.get_ip6_connectivity().await.unwrap();
+        println!("IPv4 Connectivity: {}", ip4_connectivity);
+        println!("IPv6 Connectivity: {}", ip6_connectivity);
+
+        // Get state reason
+        let (state, reason) = device_proxy.get_state_reason().await.unwrap();
+        println!("State Reason: {} ({})", reason, state);
+
+        // Show some helpful status checks using the new helper methods
+        print_device_status(&device_state, &capabilities, &metered, &interface_flags, &ip4_connectivity);
+
         println!(
-            "Ip 4 Address: {}",
+            "IPv4 Address: {}",
             get_ip4_address(&device_proxy, &connection).await
         );
-        println!("Ip 4 config: {}", device_proxy.ip4_config().await.unwrap());
+        println!("IPv4 Config Path: {}", device_proxy.ip4_config().await.unwrap());
+    }
+}
 
-        let devtype_id = device_proxy.device_type().await.unwrap();
-        match devtypes.get(&devtype_id) {
-            Some(devtype) => println!("Type: {}", devtype),
-            None => println!("Type: Unknown"),
-        };
+fn print_device_status(
+    state: &DeviceState,
+    capabilities: &DeviceCapabilities,
+    metered: &Metered,
+    flags: &DeviceInterfaceFlags,
+    connectivity: &ConnectivityState,
+) {
+    println!("--- Device Status ---");
+    
+    // Check state
+    match state {
+        DeviceState::Activated => println!("✓ Device is active and connected"),
+        DeviceState::Disconnected => println!("✗ Device is disconnected"),
+        DeviceState::Failed => println!("✗ Device connection failed"),
+        DeviceState::Unavailable => println!("⚠ Device is unavailable"),
+        _ => println!("ℹ Device state: {}", state),
+    }
 
-        let state_id = device_proxy.state().await.unwrap();
-        match states.get(&state_id) {
-            Some(state) => println!("State: {}", state),
-            None => println!("Type: Unknown"),
-        };
+    // Check capabilities
+    if capabilities.contains(DeviceCapabilities::NM_SUPPORTED) {
+        println!("✓ Supported by NetworkManager");
+    }
+    if capabilities.contains(DeviceCapabilities::CARRIER_DETECT) {
+        println!("✓ Can detect carrier status");
+    }
+    if capabilities.contains(DeviceCapabilities::IS_SOFTWARE) {
+        println!("ℹ Software device");
+    }
+
+    // Check metered status
+    if metered.is_metered() {
+        println!("💰 Connection is metered (limited data)");
+    } else if metered.is_not_metered() {
+        println!("✓ Connection is not metered");
+    }
+
+    // Check interface status
+    if flags.is_operational() {
+        println!("✓ Interface is fully operational");
+    } else {
+        if !flags.is_up() {
+            println!("✗ Interface is down");
+        }
+        if !flags.has_carrier() {
+            println!("✗ No carrier detected");
+        }
+    }
+
+    // Check connectivity
+    if connectivity.has_full_connectivity() {
+        println!("🌐 Full internet connectivity");
+    } else if connectivity.has_connectivity() {
+        println!("🔒 Limited connectivity");
+    } else if connectivity.has_captive_portal() {
+        println!("🚪 Captive portal detected");
+    } else if connectivity.has_no_connectivity() {
+        println!("✗ No connectivity");
     }
 }
 
@@ -74,49 +150,4 @@ async fn get_ip4_address(device_proxy: &DeviceProxy<'_>, connection: &Connection
     };
 
     address.downcast_ref().unwrap()
-}
-
-fn get_states() -> HashMap<u32, String> {
-    let mut states: HashMap<u32, String> = HashMap::new();
-
-    states.insert(0, "Unknown".to_string());
-    states.insert(10, "Unmanaged".to_string());
-    states.insert(20, "Unavailable".to_string());
-    states.insert(30, "Disconnected".to_string());
-    states.insert(40, "Prepare".to_string());
-    states.insert(50, "Config".to_string());
-    states.insert(60, "Need Auth".to_string());
-    states.insert(70, "IP Config".to_string());
-    states.insert(80, "IP Check".to_string());
-    states.insert(90, "Secondaries".to_string());
-    states.insert(100, "Activated".to_string());
-    states.insert(110, "Deactivating".to_string());
-    states.insert(120, "Failed".to_string());
-
-    states
-}
-
-fn get_devtypes() -> HashMap<u32, String> {
-    let mut devtypes: HashMap<u32, String> = HashMap::new();
-
-    devtypes.insert(1, "Ethernet".to_string());
-    devtypes.insert(2, "Wi-Fi".to_string());
-    devtypes.insert(5, "Bluetooth".to_string());
-    devtypes.insert(6, "OLPC".to_string());
-    devtypes.insert(7, "WiMAX".to_string());
-    devtypes.insert(8, "Modem".to_string());
-    devtypes.insert(9, "InfiniBand".to_string());
-    devtypes.insert(10, "Bond".to_string());
-    devtypes.insert(11, "VLAN".to_string());
-    devtypes.insert(12, "ADSL".to_string());
-    devtypes.insert(13, "Bridge".to_string());
-    devtypes.insert(14, "Generic".to_string());
-    devtypes.insert(15, "Team".to_string());
-    devtypes.insert(16, "TUN".to_string());
-    devtypes.insert(17, "IPTunnel".to_string());
-    devtypes.insert(18, "MACVLAN".to_string());
-    devtypes.insert(19, "VXLAN".to_string());
-    devtypes.insert(20, "Veth".to_string());
-
-    devtypes
 }
