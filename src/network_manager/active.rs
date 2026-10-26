@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl ActiveProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<ActiveProxy<'_>> {
         ActiveProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -38,11 +38,11 @@ pub trait Active {
 
     /// Connection property
     #[zbus(property)]
-    fn connection(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn connection(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Controller property
     #[zbus(property)]
-    fn controller(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn controller(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Default property
     #[zbus(property)]
@@ -54,15 +54,15 @@ pub trait Active {
 
     /// Devices property
     #[zbus(property)]
-    fn devices(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn devices(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// Dhcp4Config property
     #[zbus(property)]
-    fn dhcp4_config(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn dhcp4_config(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Dhcp6Config property
     #[zbus(property)]
-    fn dhcp6_config(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn dhcp6_config(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Id property
     #[zbus(property)]
@@ -70,19 +70,19 @@ pub trait Active {
 
     /// Ip4Config property
     #[zbus(property)]
-    fn ip4_config(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn ip4_config(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Ip6Config property
     #[zbus(property)]
-    fn ip6_config(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn ip6_config(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Master property
     #[zbus(property)]
-    fn master(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn master(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// SpecificObject property
     #[zbus(property)]
-    fn specific_object(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn specific_object(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// State property
     #[zbus(property)]

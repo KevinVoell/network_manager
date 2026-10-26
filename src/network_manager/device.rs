@@ -16,11 +16,11 @@ use zbus::{Connection, Result, proxy};
 
 impl DeviceProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<DeviceProxy<'_>> {
         DeviceProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -45,10 +45,7 @@ pub trait Device {
         &self,
         flags: u32,
     ) -> zbus::Result<(
-        std::collections::HashMap<
-            String,
-            std::collections::HashMap<String, zbus::zvariant::OwnedValue>,
-        >,
+        std::collections::HashMap<String, std::collections::HashMap<String, zbus::OwnedVariant>>,
         u64,
     )>;
 
@@ -57,7 +54,7 @@ pub trait Device {
         &self,
         connection: std::collections::HashMap<
             &str,
-            std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+            std::collections::HashMap<&str, zbus::Variant<'_>>,
         >,
         version_id: u64,
         flags: u32,
@@ -70,7 +67,7 @@ pub trait Device {
 
     /// ActiveConnection property
     #[zbus(property)]
-    fn active_connection(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn active_connection(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Autoconnect property
     #[zbus(property)]
@@ -80,7 +77,7 @@ pub trait Device {
 
     /// AvailableConnections property
     #[zbus(property)]
-    fn available_connections(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn available_connections(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// Capabilities property
     #[zbus(property)]
@@ -92,11 +89,11 @@ pub trait Device {
 
     /// Dhcp4Config property
     #[zbus(property)]
-    fn dhcp4_config(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn dhcp4_config(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Dhcp6Config property
     #[zbus(property)]
-    fn dhcp6_config(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn dhcp6_config(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Driver property
     #[zbus(property)]
@@ -132,7 +129,7 @@ pub trait Device {
 
     /// Ip4Config property
     #[zbus(property)]
-    fn ip4_config(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn ip4_config(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Ip4Connectivity property
     #[zbus(property)]
@@ -140,7 +137,7 @@ pub trait Device {
 
     /// Ip6Config property
     #[zbus(property)]
-    fn ip6_config(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn ip6_config(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Ip6Connectivity property
     #[zbus(property)]
@@ -154,7 +151,7 @@ pub trait Device {
     #[zbus(property)]
     fn lldp_neighbors(
         &self,
-    ) -> zbus::Result<Vec<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>>;
+    ) -> zbus::Result<Vec<std::collections::HashMap<String, zbus::OwnedVariant>>>;
 
     /// Managed property
     #[zbus(property)]
@@ -184,7 +181,7 @@ pub trait Device {
 
     /// Ports property
     #[zbus(property)]
-    fn ports(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn ports(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// Real property
     #[zbus(property)]

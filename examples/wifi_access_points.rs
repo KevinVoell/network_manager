@@ -65,7 +65,7 @@ async fn monitor_add_access_point(wireless_proxy: &WirelessProxy<'_>, connection
     while let Some(v) = access_points_changed.next().await {
         let args = v.args().unwrap();
 
-        let owned_object_path = zbus::zvariant::OwnedObjectPath::from(args.access_point);
+        let owned_object_path = zbus::OwnedObjectPath::from(args.access_point);
 
         let access_point = AccessPointProxy::new_from_path(owned_object_path, connection)
             .await
@@ -85,7 +85,7 @@ async fn monitor_remove_access_point(wireless_proxy: &WirelessProxy<'_>, connect
     while let Some(v) = access_points_changed.next().await {
         let args = v.args().unwrap();
 
-        let owned_object_path = zbus::zvariant::OwnedObjectPath::from(args.access_point);
+        let owned_object_path = zbus::OwnedObjectPath::from(args.access_point);
 
         let access_point = AccessPointProxy::new_from_path(owned_object_path, connection)
             .await

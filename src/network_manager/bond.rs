@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl BondProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<BondProxy<'_>> {
         BondProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -42,5 +42,5 @@ pub trait Bond {
 
     /// Slaves property
     #[zbus(property)]
-    fn slaves(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn slaves(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 }

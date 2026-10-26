@@ -23,7 +23,7 @@ use std::fs::File;
 use std::io::Read;
 use std::time::Duration;
 use zbus::Connection;
-use zbus::zvariant::OwnedObjectPath;
+use zbus::OwnedObjectPath;
 
 const SCAN_THRESHOLD_MSEC: u128 = 10_000;
 

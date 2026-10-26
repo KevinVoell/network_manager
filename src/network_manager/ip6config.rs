@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl IP6ConfigProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<IP6ConfigProxy<'_>> {
         IP6ConfigProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -36,7 +36,7 @@ pub trait IP6Config {
     #[zbus(property)]
     fn address_data(
         &self,
-    ) -> zbus::Result<Vec<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>>;
+    ) -> zbus::Result<Vec<std::collections::HashMap<String, zbus::OwnedVariant>>>;
 
     /// Addresses property
     #[zbus(property)]
@@ -67,7 +67,7 @@ pub trait IP6Config {
     #[zbus(property)]
     fn route_data(
         &self,
-    ) -> zbus::Result<Vec<std::collections::HashMap<String, zbus::zvariant::OwnedValue>>>;
+    ) -> zbus::Result<Vec<std::collections::HashMap<String, zbus::OwnedVariant>>>;
 
     /// Routes property
     #[zbus(property)]

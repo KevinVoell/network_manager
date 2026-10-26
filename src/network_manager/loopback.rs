@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl LoopbackProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<LoopbackProxy<'_>> {
         LoopbackProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }

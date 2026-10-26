@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl AgentManagerProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<AgentManagerProxy<'_>> {
         AgentManagerProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }

@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl VxlanProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<VxlanProxy<'_>> {
         VxlanProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -74,7 +74,7 @@ pub trait Vxlan {
 
     /// Parent property
     #[zbus(property)]
-    fn parent(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn parent(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Proxy property
     #[zbus(property)]

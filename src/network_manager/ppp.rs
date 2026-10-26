@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl PPPProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<PPPProxy<'_>> {
         PPPProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -41,13 +41,13 @@ pub trait PPP {
     /// SetIp4Config method
     fn set_ip4_config(
         &self,
-        config: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+        config: std::collections::HashMap<&str, zbus::Variant<'_>>,
     ) -> zbus::Result<()>;
 
     /// SetIp6Config method
     fn set_ip6_config(
         &self,
-        config: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+        config: std::collections::HashMap<&str, zbus::Variant<'_>>,
     ) -> zbus::Result<()>;
 
     /// SetState method

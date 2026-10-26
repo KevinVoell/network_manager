@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl WiMaxProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<WiMaxProxy<'_>> {
         WiMaxProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -33,19 +33,19 @@ impl WiMaxProxy<'_> {
 )]
 pub trait WiMax {
     /// GetNspList method
-    fn get_nsp_list(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn get_nsp_list(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// NspAdded signal
     #[zbus(signal)]
-    fn nsp_added(&self, nsp: zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
+    fn nsp_added(&self, nsp: zbus::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// NspRemoved signal
     #[zbus(signal)]
-    fn nsp_removed(&self, nsp: zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
+    fn nsp_removed(&self, nsp: zbus::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// ActiveNsp property
     #[zbus(property)]
-    fn active_nsp(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn active_nsp(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Bsid property
     #[zbus(property)]
@@ -65,7 +65,7 @@ pub trait WiMax {
 
     /// Nsps property
     #[zbus(property)]
-    fn nsps(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn nsps(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// Rssi property
     #[zbus(property)]

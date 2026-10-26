@@ -16,11 +16,11 @@ use zbus::{Connection, Result, proxy};
 
 impl WirelessProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<WirelessProxy<'_>> {
         WirelessProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -34,35 +34,32 @@ impl WirelessProxy<'_> {
 )]
 pub trait Wireless {
     /// GetAccessPoints method
-    fn get_access_points(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn get_access_points(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// GetAllAccessPoints method
-    fn get_all_access_points(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn get_all_access_points(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// RequestScan method
     fn request_scan(
         &self,
-        options: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+        options: std::collections::HashMap<&str, zbus::Variant<'_>>,
     ) -> zbus::Result<()>;
 
     /// AccessPointAdded signal
     #[zbus(signal)]
-    fn access_point_added(&self, access_point: zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
+    fn access_point_added(&self, access_point: zbus::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// AccessPointRemoved signal
     #[zbus(signal)]
-    fn access_point_removed(
-        &self,
-        access_point: zbus::zvariant::ObjectPath<'_>,
-    ) -> zbus::Result<()>;
+    fn access_point_removed(&self, access_point: zbus::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// AccessPoints property
     #[zbus(property)]
-    fn access_points(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn access_points(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// ActiveAccessPoint property
     #[zbus(property)]
-    fn active_access_point(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn active_access_point(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Bitrate property
     #[zbus(property)]

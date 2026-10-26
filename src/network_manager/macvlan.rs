@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl MacvlanProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<MacvlanProxy<'_>> {
         MacvlanProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -42,7 +42,7 @@ pub trait Macvlan {
 
     /// Parent property
     #[zbus(property)]
-    fn parent(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn parent(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Tap property
     #[zbus(property)]

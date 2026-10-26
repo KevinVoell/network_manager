@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl HsrProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<HsrProxy<'_>> {
         HsrProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -38,11 +38,11 @@ pub trait Hsr {
 
     /// Port1 property
     #[zbus(property)]
-    fn port1(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn port1(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Port2 property
     #[zbus(property)]
-    fn port2(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn port2(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Prp property
     #[zbus(property)]

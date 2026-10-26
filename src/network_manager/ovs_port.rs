@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl OvsPortProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<OvsPortProxy<'_>> {
         OvsPortProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -34,5 +34,5 @@ impl OvsPortProxy<'_> {
 pub trait OvsPort {
     /// Slaves property
     #[zbus(property)]
-    fn slaves(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn slaves(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 }

@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl WifiP2PProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<WifiP2PProxy<'_>> {
         WifiP2PProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -35,7 +35,7 @@ pub trait WifiP2P {
     /// StartFind method
     fn start_find(
         &self,
-        options: std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+        options: std::collections::HashMap<&str, zbus::Variant<'_>>,
     ) -> zbus::Result<()>;
 
     /// StopFind method
@@ -43,11 +43,11 @@ pub trait WifiP2P {
 
     /// PeerAdded signal
     #[zbus(signal)]
-    fn peer_added(&self, peer: zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
+    fn peer_added(&self, peer: zbus::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// PeerRemoved signal
     #[zbus(signal)]
-    fn peer_removed(&self, peer: zbus::zvariant::ObjectPath<'_>) -> zbus::Result<()>;
+    fn peer_removed(&self, peer: zbus::ObjectPath<'_>) -> zbus::Result<()>;
 
     /// HwAddress property
     #[zbus(property)]
@@ -55,5 +55,5 @@ pub trait WifiP2P {
 
     /// Peers property
     #[zbus(property)]
-    fn peers(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn peers(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 }

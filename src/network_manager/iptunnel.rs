@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl IPTunnelProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<IPTunnelProxy<'_>> {
         IPTunnelProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -66,7 +66,7 @@ pub trait IPTunnel {
 
     /// Parent property
     #[zbus(property)]
-    fn parent(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn parent(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// PathMtuDiscovery property
     #[zbus(property)]

@@ -17,7 +17,7 @@ use rusty_network_manager::NetworkManagerProxy;
 use std::collections::HashMap;
 use std::env;
 use zbus::Connection;
-use zbus::zvariant::Value;
+use zbus::Variant;
 
 #[tokio::main]
 async fn main() {
@@ -29,7 +29,7 @@ async fn main() {
         .await
         .expect("Could not get NetworkManager");
 
-    let wireless_interface_path: zbus::zvariant::OwnedObjectPath = nm
+    let wireless_interface_path: zbus::OwnedObjectPath = nm
         .get_device_by_ip_iface("wlan0")
         .await
         .expect("Could not get wireless interface");
@@ -39,10 +39,7 @@ async fn main() {
     };
 }
 
-async fn connect(
-    nm: &NetworkManagerProxy<'_>,
-    wireless_interface_path: zbus::zvariant::OwnedObjectPath,
-) {
+async fn connect(nm: &NetworkManagerProxy<'_>, wireless_interface_path: zbus::OwnedObjectPath) {
     let args: Vec<String> = env::args().collect();
 
     if args.len() != 4 {
@@ -55,34 +52,34 @@ async fn connect(
     let ssid = &args[2];
     let psk = &args[3];
 
-    let mut connection_settings: HashMap<&str, HashMap<&str, Value<'_>>> = HashMap::new();
+    let mut connection_settings: HashMap<&str, HashMap<&str, Variant<'_>>> = HashMap::new();
 
-    let mut connection: HashMap<&str, Value<'_>> = HashMap::new();
-    connection.insert("id", Value::new(connection_name));
-    connection.insert("type", Value::new("802-11-wireless"));
-    connection.insert("autoconnect", Value::new(true));
+    let mut connection: HashMap<&str, Variant<'_>> = HashMap::new();
+    connection.insert("id", Variant::new(connection_name));
+    connection.insert("type", Variant::new("802-11-wireless"));
+    connection.insert("autoconnect", Variant::new(true));
     connection_settings.insert("connection", connection);
 
-    let mut wireless80211: HashMap<&str, Value<'_>> = HashMap::new();
+    let mut wireless80211: HashMap<&str, Variant<'_>> = HashMap::new();
     // SSID must be a Vec<u8>
-    wireless80211.insert("ssid", Value::new(ssid.as_bytes()));
-    wireless80211.insert("mode", Value::new("infrastructure"));
+    wireless80211.insert("ssid", Variant::new(ssid.as_bytes()));
+    wireless80211.insert("mode", Variant::new("infrastructure"));
     connection_settings.insert("802-11-wireless", wireless80211);
 
-    let mut wireless_security: HashMap<&str, Value<'_>> = HashMap::new();
-    wireless_security.insert("key-mgmt", Value::new("wpa-psk"));
-    wireless_security.insert("psk", Value::new(psk));
+    let mut wireless_security: HashMap<&str, Variant<'_>> = HashMap::new();
+    wireless_security.insert("key-mgmt", Variant::new("wpa-psk"));
+    wireless_security.insert("psk", Variant::new(psk));
     connection_settings.insert("802-11-wireless-security", wireless_security);
 
-    let mut ipv4: HashMap<&str, Value<'_>> = HashMap::new();
-    ipv4.insert("method", Value::new("auto"));
+    let mut ipv4: HashMap<&str, Variant<'_>> = HashMap::new();
+    ipv4.insert("method", Variant::new("auto"));
     connection_settings.insert("ipv4", ipv4);
 
-    let mut ipv6: HashMap<&str, Value<'_>> = HashMap::new();
-    ipv6.insert("method", Value::new("auto"));
+    let mut ipv6: HashMap<&str, Variant<'_>> = HashMap::new();
+    ipv6.insert("method", Variant::new("auto"));
     connection_settings.insert("ipv6", ipv6);
 
-    let specific_object = zbus::zvariant::OwnedObjectPath::try_from("/").unwrap();
+    let specific_object = zbus::OwnedObjectPath::try_from("/").unwrap();
 
     nm.add_and_activate_connection(
         connection_settings,

@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl OlpcMeshProxy<'_> {
     pub async fn getnew_from_path_proxy(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<OlpcMeshProxy<'_>> {
         OlpcMeshProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -38,7 +38,7 @@ pub trait OlpcMesh {
 
     /// Companion property
     #[zbus(property)]
-    fn companion(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn companion(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// HwAddress property
     #[zbus(property)]

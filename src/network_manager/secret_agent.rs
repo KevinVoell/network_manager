@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl SecretAgentProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<SecretAgentProxy<'_>> {
         SecretAgentProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -35,7 +35,7 @@ pub trait SecretAgent {
     /// CancelGetSecrets method
     fn cancel_get_secrets(
         &self,
-        connection_path: &zbus::zvariant::ObjectPath<'_>,
+        connection_path: &zbus::ObjectPath<'_>,
         setting_name: &str,
     ) -> zbus::Result<()>;
 
@@ -44,9 +44,9 @@ pub trait SecretAgent {
         &self,
         connection: std::collections::HashMap<
             &str,
-            std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+            std::collections::HashMap<&str, zbus::Variant<'_>>,
         >,
-        connection_path: &zbus::zvariant::ObjectPath<'_>,
+        connection_path: &zbus::ObjectPath<'_>,
     ) -> zbus::Result<()>;
 
     /// GetSecrets method
@@ -54,17 +54,14 @@ pub trait SecretAgent {
         &self,
         connection: std::collections::HashMap<
             &str,
-            std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+            std::collections::HashMap<&str, zbus::Variant<'_>>,
         >,
-        connection_path: &zbus::zvariant::ObjectPath<'_>,
+        connection_path: &zbus::ObjectPath<'_>,
         setting_name: &str,
         hints: &[&str],
         flags: u32,
     ) -> zbus::Result<
-        std::collections::HashMap<
-            String,
-            std::collections::HashMap<String, zbus::zvariant::OwnedValue>,
-        >,
+        std::collections::HashMap<String, std::collections::HashMap<String, zbus::OwnedVariant>>,
     >;
 
     /// SaveSecrets method
@@ -72,8 +69,8 @@ pub trait SecretAgent {
         &self,
         connection: std::collections::HashMap<
             &str,
-            std::collections::HashMap<&str, zbus::zvariant::Value<'_>>,
+            std::collections::HashMap<&str, zbus::Variant<'_>>,
         >,
-        connection_path: &zbus::zvariant::ObjectPath<'_>,
+        connection_path: &zbus::ObjectPath<'_>,
     ) -> zbus::Result<()>;
 }

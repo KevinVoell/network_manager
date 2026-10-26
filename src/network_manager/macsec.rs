@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl MacsecProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<MacsecProxy<'_>> {
         MacsecProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -58,7 +58,7 @@ pub trait Macsec {
 
     /// Parent property
     #[zbus(property)]
-    fn parent(&self) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn parent(&self) -> zbus::Result<zbus::OwnedObjectPath>;
 
     /// Protect property
     #[zbus(property)]

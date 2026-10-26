@@ -15,11 +15,11 @@ use zbus::{Connection, Result, proxy};
 
 impl CheckpointProxy<'_> {
     pub async fn new_from_path(
-        device_path: zbus::zvariant::OwnedObjectPath,
+        device_path: zbus::OwnedObjectPath,
         connection: &Connection,
     ) -> Result<CheckpointProxy<'_>> {
         CheckpointProxy::builder(connection)
-            .path(device_path)?
+            .path(device_path)
             .build()
             .await
     }
@@ -38,7 +38,7 @@ pub trait Checkpoint {
 
     /// Devices property
     #[zbus(property)]
-    fn devices(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn devices(&self) -> zbus::Result<Vec<zbus::OwnedObjectPath>>;
 
     /// RollbackTimeout property
     #[zbus(property)]
